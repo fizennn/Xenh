@@ -1,0 +1,499 @@
+{
+	"info": {
+		"_postman_id": "d4ffdce2-d4fe-44dd-a718-f1c6c3523fba",
+		"name": "Xenh",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39725644"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "addUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"fizennn\",\r\n  \"password\": \"123451211\",\r\n  \"email\": \"huylqph49142@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUser",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/users/684e7d8be372d69d29facb88",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"users",
+								"684e7d8be372d69d29facb88"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateUser",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"updateduser\",\r\n  \"email\": \"updated@example.com\",\r\n  \"password\": \"newpassword123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/users/684e7d8be372d69d29facb88",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"users",
+								"684e7d8be372d69d29facb88"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "userInfo",
+			"item": [
+				{
+					"name": "addUserInfo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"_id\": \"684e8cdf50697f42a73c7c31\",\r\n  \"avata_url\": \"http://example.com/avatar.jpg\",\r\n  \"gender\": \"male\",\r\n  \"height\": 175,\r\n  \"weight\": 70,\r\n  \"role\": \"user\",\r\n  \"status\": \"active\",\r\n  \"full_name\": \"Luu Quang Huy\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/userinfo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"userinfo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateUserInfo",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"full_name\": \"Luu Quang Huy\",\r\n  \"height\": 180\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/userinfo/684e819c9df77859f3d47621",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"userinfo",
+								"684e819c9df77859f3d47621"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "item",
+			"item": [
+				{
+					"name": "addItem",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"type\": \"shirt\",\r\n  \"color\": \"blue\",\r\n  \"pattern\": \"solid\",\r\n  \"style\": \"casual\",\r\n  \"name\": \"Blue Casual Shirt\",\r\n  \"img\":\"testimg.png\",\r\n  \"user_id\": \"684e8cdf50697f42a73c7c31\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/items",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getItem",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/items/684e8d4350697f42a73c7c37",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"items",
+								"684e8d4350697f42a73c7c37"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateItem",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"color\": \"blue\",\r\n  \"name\": \"Red Casual Shirt\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/items/684e82e729d79c00736ba1b6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"items",
+								"684e82e729d79c00736ba1b6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllItemByUserId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/items/user/684e8cdf50697f42a73c7c31",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"items",
+								"user",
+								"684e8cdf50697f42a73c7c31"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "wardrobe",
+			"item": [
+				{
+					"name": "addItem",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"item_id\": \"684e8d4350697f42a73c7c371\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/wardrobe/add-item/684e8cdf50697f42a73c7c31",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"wardrobe",
+								"add-item",
+								"684e8cdf50697f42a73c7c31"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delItem",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"item_id\": \"684e8d4350697f42a73c7c37\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/wardrobe/remove-item/684e8cdf50697f42a73c7c31",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"wardrobe",
+								"remove-item",
+								"684e8cdf50697f42a73c7c31"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllItemByUserId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/wardrobe/user/684e8cdf50697f42a73c7c31",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"wardrobe",
+								"user",
+								"684e8cdf50697f42a73c7c31"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "post",
+			"item": [
+				{
+					"name": "addPost",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"user_id\": \"684e8cdf50697f42a73c7c31\",\r\n  \"description\": \"My new outfit!\",\r\n  \"image_url\": \"http://example.com/outfit.jpg\",\r\n  \"items\": [\"684e8d4350697f42a73c7c37\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/posts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPost",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/posts/684e90bb8d415c1412c04d0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"posts",
+								"684e90bb8d415c1412c04d0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPostByUserId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/posts/user/684e8cdf50697f42a73c7c31",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"posts",
+								"user",
+								"684e8cdf50697f42a73c7c31"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "toggleFav",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"user_id\": \"684e8cdf50697f42a73c7c31\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/posts/fav/684e93dbf9a3ac683fcaf799",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"posts",
+								"fav",
+								"684e93dbf9a3ac683fcaf799"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "savePost",
+			"item": [
+				{
+					"name": "addToSavePost",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"post_id\": \"684e90bb8d415c1412c04d0d1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/savedposts/save/684e8cdf50697f42a73c7c31",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"savedposts",
+								"save",
+								"684e8cdf50697f42a73c7c31"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
