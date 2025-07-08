@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#sidebar {
+  transition: width 0.3s ease;
+}
+
+#sidebar.collapsed {
+  width: 80px;
+}
+
+#sidebar.collapsed .text-xl,
+#sidebar.collapsed span {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  #sidebar {
+    transform: translateX(-100%);
+  }
+  #sidebar.collapsed {
+    transform: translateX(0);
+    width: 80px;
+  }
+  .flex-1 {
+    margin-left: 0 !important;
+  }
+}
+
+main {
+  min-height: calc(100vh - 64px); /* Điều chỉnh dựa trên chiều cao header */
+  background: linear-gradient(135deg, #f3e7f9 50%, #fce7f3 50%); /* Tím/hồng xen kẽ */
+}
+
+h2 {
+  color: #8A4AF3;
+}
+
+button {
+  transition: background-color 0.3s;
+}
+
+.bg-purple-600 {
+  background-color: #8A4AF3;
+}
+
+.bg-pink-500 {
+  background-color: #F94A8A;
+}
+
+.hover\:bg-purple-700:hover {
+  background-color: #6B38D1;
+}
+
+.hover\:bg-pink-600:hover {
+  background-color: #D73770;
+}
+
+/* Đảm bảo chữ trong sidebar luôn trắng */
+#sidebar .text-white {
+  color: #FFFFFF !important;
+}
