@@ -15,10 +15,10 @@ const samplePosts = [
   {
     id: 101,
     user: sampleUsers[1],
-    image: 'https://i.imgur.com/1Q9Z1Zm.png',
+    image: 'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=400&fit=crop',
     tags: [
-      { type: 'Áo sơ mi', color: 'Trắng', style: 'Formal', link: 'https://shopee.vn/aosomi' },
-      { type: 'Quần tây', color: 'Đen', style: 'Formal', link: 'https://shopee.vn/quantay' },
+      { type: 'Áo sơ mi', color: 'Trắng', style: 'Formal', link: 'https://www.google.com' },
+      { type: 'Quần tây', color: 'Đen', style: 'Formal', link: 'https://www.youtube.com' },
     ],
     createdAt: '2024-05-01T09:00:00Z',
     likes: 12,
@@ -30,11 +30,11 @@ const samplePosts = [
   {
     id: 102,
     user: sampleUsers[2],
-    image: 'https://i.imgur.com/3Q9Z1Zm.png',
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop',
     tags: [
-      { type: 'Áo thun', color: 'Xanh', style: 'Casual', link: 'https://tiki.vn/aothun' },
+      { type: 'Áo thun', color: 'Xanh', style: 'Casual', link: 'https://www.facebook.com' },
       { type: 'Quần short', color: 'Be', style: 'Casual' },
-      { type: 'Giày sneaker', color: 'Trắng', style: 'Sporty', link: 'https://shopee.vn/giaysneaker' },
+      { type: 'Giày sneaker', color: 'Trắng', style: 'Sporty', link: 'https://www.github.com' },
     ],
     createdAt: '2024-05-02T08:00:00Z',
     likes: 8,
@@ -45,9 +45,9 @@ const samplePosts = [
   {
     id: 103,
     user: sampleUsers[0],
-    image: 'https://i.imgur.com/2Q9Z1Zm.png',
+    image: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400&h=400&fit=crop',
     tags: [
-      { type: 'Đầm dạ hội', color: 'Đỏ', style: 'Elegant', link: 'https://tiki.vn/dam' },
+      { type: 'Đầm dạ hội', color: 'Đỏ', style: 'Elegant', link: 'https://www.stackoverflow.com' },
       { type: 'Giày cao gót', color: 'Đen', style: 'Elegant' },
     ],
     createdAt: '2024-05-03T07:00:00Z',
@@ -61,9 +61,9 @@ const samplePosts = [
   {
     id: 104,
     user: sampleUsers[1],
-    image: 'https://i.imgur.com/4Q9Z1Zm.png',
+    image: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400&h=400&fit=crop',
     tags: [
-      { type: 'Áo khoác', color: 'Xám', style: 'Street', link: 'https://shopee.vn/aokhoac' },
+      { type: 'Áo khoác', color: 'Xám', style: 'Street', link: 'https://www.reddit.com' },
       { type: 'Quần jeans', color: 'Xanh', style: 'Street' },
     ],
     createdAt: '2024-05-04T09:00:00Z',
@@ -75,9 +75,9 @@ const samplePosts = [
   {
     id: 105,
     user: sampleUsers[2],
-    image: 'https://i.imgur.com/5Q9Z1Zm.png',
+    image: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400&h=400&fit=crop',
     tags: [
-      { type: 'Áo hoodie', color: 'Đen', style: 'Sporty', link: 'https://tiki.vn/hoodie' },
+      { type: 'Áo hoodie', color: 'Đen', style: 'Sporty', link: 'https://www.twitter.com' },
       { type: 'Quần jogger', color: 'Xám', style: 'Sporty' },
     ],
     createdAt: '2024-05-05T09:00:00Z',
@@ -89,7 +89,7 @@ const samplePosts = [
   {
     id: 106,
     user: sampleUsers[0],
-    image: 'https://i.imgur.com/6Q9Z1Zm.png',
+    image: 'https://images.unsplash.com/photo-1445205170230-053b83016050?w=400&h=400&fit=crop',
     tags: [
       { type: 'Áo len', color: 'Nâu', style: 'Vintage', link: 'https://shopee.vn/aolen' },
       { type: 'Chân váy', color: 'Đen', style: 'Vintage' },
@@ -103,7 +103,7 @@ const samplePosts = [
   {
     id: 107,
     user: sampleUsers[1],
-    image: 'https://i.imgur.com/7Q9Z1Zm.png',
+    image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=400&fit=crop',
     tags: [
       { type: 'Áo blazer', color: 'Be', style: 'Chic', link: 'https://tiki.vn/blazer' },
       { type: 'Quần tây', color: 'Nâu', style: 'Chic' },
@@ -117,7 +117,7 @@ const samplePosts = [
   {
     id: 108,
     user: sampleUsers[2],
-    image: 'https://i.imgur.com/8Q9Z1Zm.png',
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop',
     tags: [
       { type: 'Áo phông', color: 'Trắng', style: 'Basic', link: 'https://shopee.vn/aophong' },
       { type: 'Quần short', color: 'Xanh', style: 'Basic' },
@@ -131,7 +131,7 @@ const samplePosts = [
   {
     id: 109,
     user: sampleUsers[0],
-    image: 'https://i.imgur.com/9Q9Z1Zm.png',
+    image: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400&h=400&fit=crop',
     tags: [
       { type: 'Áo khoác bomber', color: 'Xanh rêu', style: 'Street', link: 'https://tiki.vn/bomber' },
       { type: 'Quần jeans', color: 'Đen', style: 'Street' },
@@ -145,7 +145,7 @@ const samplePosts = [
   {
     id: 110,
     user: sampleUsers[1],
-    image: 'https://i.imgur.com/10Q9Z1Zm.png',
+    image: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400&h=400&fit=crop',
     tags: [
       { type: 'Áo sơ mi caro', color: 'Đỏ', style: 'Casual', link: 'https://shopee.vn/aosomicaro' },
       { type: 'Quần kaki', color: 'Nâu', style: 'Casual' },
@@ -159,7 +159,7 @@ const samplePosts = [
   {
     id: 111,
     user: sampleUsers[2],
-    image: 'https://i.imgur.com/11Q9Z1Zm.png',
+    image: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400&h=400&fit=crop',
     tags: [
       { type: 'Áo khoác da', color: 'Đen', style: 'Rock', link: 'https://tiki.vn/aokhoacda' },
       { type: 'Quần jeans', color: 'Xám', style: 'Rock' },
@@ -173,7 +173,7 @@ const samplePosts = [
   {
     id: 112,
     user: sampleUsers[0],
-    image: 'https://i.imgur.com/12Q9Z1Zm.png',
+    image: 'https://images.unsplash.com/photo-1445205170230-053b83016050?w=400&h=400&fit=crop',
     tags: [
       { type: 'Áo len cổ lọ', color: 'Trắng', style: 'Winter', link: 'https://shopee.vn/aolencolo' },
       { type: 'Chân váy len', color: 'Xám', style: 'Winter' },
@@ -187,7 +187,7 @@ const samplePosts = [
   {
     id: 113,
     user: sampleUsers[1],
-    image: 'https://i.imgur.com/13Q9Z1Zm.png',
+    image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=400&fit=crop',
     tags: [
       { type: 'Áo khoác dạ', color: 'Nâu', style: 'Elegant', link: 'https://tiki.vn/aokhoacda' },
       { type: 'Quần tây', color: 'Đen', style: 'Elegant' },
@@ -201,21 +201,21 @@ const samplePosts = [
   {
     id: 114,
     user: sampleUsers[2],
-    image: 'https://i.imgur.com/14Q9Z1Zm.png',
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop',
     tags: [
       { type: 'Áo vest', color: 'Xám', style: 'Formal', link: 'https://shopee.vn/aovest' },
-      { type: 'Quần tây', color: 'Xám', style: 'Formal' },
+      { type: 'Quần tây', color: 'Đen', style: 'Formal' },
     ],
     createdAt: '2024-05-14T09:00:00Z',
     likes: 16,
     comments: [
-      { user: 'Linh Fashion', text: 'Chuẩn soái ca!', createdAt: '2024-05-14T10:00:00Z' },
+      { user: 'Linh Fashion', text: 'Lịch lãm!', createdAt: '2024-05-14T10:00:00Z' },
     ],
   },
   {
     id: 115,
     user: sampleUsers[0],
-    image: 'https://i.imgur.com/15Q9Z1Zm.png',
+    image: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400&h=400&fit=crop',
     tags: [
       { type: 'Áo thun dài tay', color: 'Xanh', style: 'Basic', link: 'https://tiki.vn/aothundai' },
       { type: 'Quần jeans', color: 'Xanh', style: 'Basic' },
@@ -229,35 +229,35 @@ const samplePosts = [
   {
     id: 116,
     user: sampleUsers[1],
-    image: 'https://i.imgur.com/16Q9Z1Zm.png',
+    image: 'https://images.unsplash.com/photo-1445205170230-053b83016050?w=400&h=400&fit=crop',
     tags: [
       { type: 'Áo croptop', color: 'Trắng', style: 'Sexy', link: 'https://shopee.vn/croptop' },
-      { type: 'Quần short', color: 'Đen', style: 'Sexy' },
+      { type: 'Quần jeans', color: 'Xanh', style: 'Sexy' },
     ],
     createdAt: '2024-05-16T09:00:00Z',
-    likes: 11,
+    likes: 20,
     comments: [
-      { user: 'User Demo', text: 'Cá tính!', createdAt: '2024-05-16T10:00:00Z' },
+      { user: 'User Demo', text: 'Quyến rũ!', createdAt: '2024-05-16T10:00:00Z' },
     ],
   },
   {
     id: 117,
     user: sampleUsers[2],
-    image: 'https://i.imgur.com/17Q9Z1Zm.png',
+    image: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400&h=400&fit=crop',
     tags: [
       { type: 'Áo sơ mi lụa', color: 'Hồng', style: 'Elegant', link: 'https://tiki.vn/aosomilua' },
-      { type: 'Chân váy', color: 'Trắng', style: 'Elegant' },
+      { type: 'Quần tây', color: 'Đen', style: 'Elegant' },
     ],
     createdAt: '2024-05-17T09:00:00Z',
-    likes: 14,
+    likes: 11,
     comments: [
-      { user: 'Linh Fashion', text: 'Nữ tính quá!', createdAt: '2024-05-17T10:00:00Z' },
+      { user: 'Linh Fashion', text: 'Sang trọng!', createdAt: '2024-05-17T10:00:00Z' },
     ],
   },
   {
     id: 118,
     user: sampleUsers[0],
-    image: 'https://i.imgur.com/18Q9Z1Zm.png',
+    image: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400&h=400&fit=crop',
     tags: [
       { type: 'Áo khoác gió', color: 'Xanh', style: 'Sporty', link: 'https://shopee.vn/aokhoacgio' },
       { type: 'Quần jogger', color: 'Đen', style: 'Sporty' },
@@ -265,35 +265,35 @@ const samplePosts = [
     createdAt: '2024-05-18T09:00:00Z',
     likes: 9,
     comments: [
-      { user: 'Phong Style', text: 'Chạy bộ hợp luôn!', createdAt: '2024-05-18T10:00:00Z' },
+      { user: 'Phong Style', text: 'Năng động!', createdAt: '2024-05-18T10:00:00Z' },
     ],
   },
   {
     id: 119,
     user: sampleUsers[1],
-    image: 'https://i.imgur.com/19Q9Z1Zm.png',
+    image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=400&fit=crop',
     tags: [
       { type: 'Áo len oversize', color: 'Be', style: 'Vintage', link: 'https://tiki.vn/aolenoversize' },
-      { type: 'Chân váy len', color: 'Nâu', style: 'Vintage' },
+      { type: 'Quần jeans', color: 'Xanh', style: 'Vintage' },
     ],
     createdAt: '2024-05-19T09:00:00Z',
-    likes: 10,
+    likes: 13,
     comments: [
-      { user: 'User Demo', text: 'Ấm áp dễ thương!', createdAt: '2024-05-19T10:00:00Z' },
+      { user: 'User Demo', text: 'Thời trang!', createdAt: '2024-05-19T10:00:00Z' },
     ],
   },
   {
     id: 120,
     user: sampleUsers[2],
-    image: 'https://i.imgur.com/20Q9Z1Zm.png',
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop',
     tags: [
       { type: 'Áo khoác lông', color: 'Trắng', style: 'Winter', link: 'https://shopee.vn/aokhoaclong' },
-      { type: 'Quần jeans', color: 'Xanh', style: 'Winter' },
+      { type: 'Quần jeans', color: 'Đen', style: 'Winter' },
     ],
     createdAt: '2024-05-20T09:00:00Z',
-    likes: 13,
+    likes: 18,
     comments: [
-      { user: 'Linh Fashion', text: 'Sang chảnh mùa đông!', createdAt: '2024-05-20T10:00:00Z' },
+      { user: 'Linh Fashion', text: 'Ấm áp!', createdAt: '2024-05-20T10:00:00Z' },
     ],
   },
 ];

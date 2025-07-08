@@ -1,194 +1,82 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, Image, FlatList, TouchableOpacity, ActivityIndicator, Dimensions, Pressable, Modal } from 'react-native';
-import { suggestOutfitsAI } from '../api/ai';
-import TryOnModal from '../components/TryOnModal';
-import { ThemedText } from '../components/ThemedText';
-import { ThemedView } from '../components/ThemedView';
-import { IconSymbol } from '../components/ui/IconSymbol';
-import { Colors } from '../constants/Colors';
+import React from 'react';
+import { View, Text, StyleSheet, FlatList } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { Ionicons } from '@expo/vector-icons';
 
-const CONTEXTS = [
-  { key: 'work', label: 'Đi làm', icon: 'house.fill' },
-  { key: 'casual', label: 'Đi chơi', icon: 'paperplane.fill' },
-  { key: 'party', label: 'Tiệc', icon: 'chevron.left.forwardslash.chevron.right' },
+const suggestions = [
+  { id: '1', title: 'Phong cách mùa hè', desc: 'Áo phông trắng + Quần short jeans + Giày sneaker' },
+  { id: '2', title: 'Công sở thanh lịch', desc: 'Sơ mi xanh + Quần tây đen + Giày lười' },
+  { id: '3', title: 'Dạo phố năng động', desc: 'Áo thun graphic + Quần jogger + Giày thể thao' },
 ];
 
 export default function StyleSuggestScreen() {
-  const [context, setContext] = useState('casual');
-  const [loading, setLoading] = useState(false);
-  const [outfits, setOutfits] = useState([]);
-  const [tryOnOutfit, setTryOnOutfit] = useState(null);
-  const [showOverlay, setShowOverlay] = useState(false);
-
-  const handleSuggest = async () => {
-    setLoading(true);
-    setShowOverlay(true);
-    const res = await suggestOutfitsAI(context);
-    setOutfits(res);
-    setLoading(false);
-    setShowOverlay(false);
-  };
-
-  const renderContextButton = (item) => (
-    <Pressable
-      key={item.key}
-      style={[styles.contextBtn, context === item.key && styles.contextBtnActive]}
-      onPress={() => setContext(item.key)}
-    >
-      <IconSymbol name={item.icon} size={22} color={context === item.key ? '#fff' : Colors.light.icon} />
-      <ThemedText style={[styles.contextLabel, context === item.key && { color: '#fff' }]}>{item.label}</ThemedText>
-    </Pressable>
-  );
-
-  const renderOutfit = ({ item }) => (
-    <ThemedView style={styles.outfitCard}>
-      <Image source={{ uri: item.image }} style={styles.image} />
-      <ThemedText type="subtitle" style={styles.desc}>{item.description}</ThemedText>
-      <View style={styles.itemList}>
-        {item.items.map((cl, idx) => (
-          <View key={idx} style={styles.itemRow}>
-            <IconSymbol name="chevron.right" size={16} color={Colors.light.icon} />
-            <ThemedText style={styles.item}>{cl.type} - {cl.color} - {cl.style}</ThemedText>
-          </View>
-        ))}
-      </View>
-      <TouchableOpacity style={styles.tryBtn} onPress={() => setTryOnOutfit(item)}>
-        <ThemedText style={styles.tryBtnText}>Mặc thử</ThemedText>
-      </TouchableOpacity>
-    </ThemedView>
-  );
-
   return (
-    <ThemedView style={styles.container}>
-      <ThemedText type="title" style={styles.title}>Gợi ý phối đồ bằng AI</ThemedText>
-      <View style={styles.contextRow}>
-        {CONTEXTS.map(renderContextButton)}
+    <LinearGradient colors={['#a1c4fd', '#c2e9fb']} style={styles.gradient}>
+      <View style={styles.card}>
+        <Text style={styles.title}>Gợi ý phối đồ</Text>
+        <FlatList
+          data={suggestions}
+          keyExtractor={item => item.id}
+          renderItem={({ item }) => (
+            <View style={styles.suggestBox}>
+              <Ionicons name="bulb-outline" size={20} color="#1976d2" style={{ marginRight: 8 }} />
+              <View style={{ flex: 1 }}>
+                <Text style={styles.suggestTitle}>{item.title}</Text>
+                <Text style={styles.suggestDesc}>{item.desc}</Text>
+              </View>
+            </View>
+          )}
+          contentContainerStyle={{ paddingBottom: 12 }}
+        />
       </View>
-      <TouchableOpacity style={styles.suggestBtn} onPress={handleSuggest} disabled={loading}>
-        <ThemedText style={styles.suggestBtnText}>Gợi ý ngay</ThemedText>
-      </TouchableOpacity>
-      <FlatList
-        data={outfits}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={renderOutfit}
-        ListEmptyComponent={!loading && <ThemedText style={{ marginTop: 16 }}>Chưa có gợi ý nào.</ThemedText>}
-        style={{ marginTop: 16 }}
-        contentContainerStyle={{ paddingBottom: 32 }}
-      />
-      {/* Overlay loading hiện đại */}
-      <Modal visible={showOverlay} transparent animationType="fade">
-        <View style={styles.overlay}>
-          <ActivityIndicator size="large" color={Colors.light.tint} />
-        </View>
-      </Modal>
-      {/* Modal mặc thử outfit */}
-      <TryOnModal
-        visible={!!tryOnOutfit}
-        onClose={() => setTryOnOutfit(null)}
-        outfit={tryOnOutfit}
-      />
-    </ThemedView>
+    </LinearGradient>
   );
 }
 
-const { width } = Dimensions.get('window');
-const CARD_RADIUS = 18;
-
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 18 },
-  title: { marginBottom: 18, textAlign: 'center' },
-  contextRow: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 18 },
-  contextBtn: {
+  gradient: {
     flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#f0f4f8',
-    borderRadius: 24,
-    marginHorizontal: 4,
-    paddingVertical: 10,
-    gap: 8,
-    shadowColor: '#000',
-    shadowOpacity: 0.04,
-    shadowRadius: 2,
-    elevation: 1,
-  },
-  contextBtnActive: {
-    backgroundColor: Colors.light.tint,
-  },
-  contextLabel: {
-    fontWeight: '600',
-    fontSize: 15,
-  },
-  suggestBtn: {
-    backgroundColor: Colors.light.tint,
-    borderRadius: 30,
-    paddingVertical: 14,
-    marginBottom: 10,
     alignItems: 'center',
-    shadowColor: '#1976d2',
-    shadowOpacity: 0.12,
-    shadowRadius: 8,
-    elevation: 2,
+    paddingVertical: 24,
   },
-  suggestBtnText: {
-    color: '#fff',
-    fontWeight: 'bold',
-    fontSize: 18,
-    letterSpacing: 1,
-  },
-  outfitCard: {
+  card: {
+    width: '92%',
     backgroundColor: '#fff',
-    borderRadius: CARD_RADIUS,
-    padding: 16,
-    marginBottom: 22,
+    borderRadius: 24,
+    padding: 28,
     shadowColor: '#000',
-    shadowOpacity: 0.08,
-    shadowRadius: 8,
-    shadowOffset: { width: 0, height: 2 },
-    elevation: 3,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.15,
+    shadowRadius: 16,
+    elevation: 8,
+    alignItems: 'center',
   },
-  image: {
-    width: width - 68,
-    height: 220,
-    borderRadius: CARD_RADIUS,
-    marginBottom: 10,
-    alignSelf: 'center',
+  title: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    color: '#1976d2',
+    marginBottom: 24,
+    letterSpacing: 1,
+    textAlign: 'center',
   },
-  desc: {
-    marginBottom: 8,
-    fontWeight: '600',
-    color: Colors.light.tint,
-  },
-  itemList: {
-    marginBottom: 10,
-  },
-  itemRow: {
+  suggestBox: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 2,
-    gap: 6,
+    backgroundColor: '#f2f6fc',
+    borderRadius: 12,
+    marginBottom: 12,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    width: 270,
   },
-  item: {
+  suggestTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#1976d2',
+  },
+  suggestDesc: {
     fontSize: 14,
-    color: '#333',
-  },
-  tryBtn: {
-    backgroundColor: Colors.light.tint,
-    borderRadius: 20,
-    paddingVertical: 8,
-    alignItems: 'center',
-    marginTop: 6,
-  },
-  tryBtnText: {
-    color: '#fff',
-    fontWeight: '600',
-    fontSize: 15,
-  },
-  overlay: {
-    flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.18)',
-    justifyContent: 'center',
-    alignItems: 'center',
+    color: '#555',
   },
 });
