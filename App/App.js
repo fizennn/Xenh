@@ -17,6 +17,7 @@ import SavedPostsScreen from './screens/SavedPostsScreen';
 import SearchScreen from './screens/SearchScreen';
 import NotificationsScreen from './screens/NotificationsScreen';
 import UserProfileScreen from './screens/UserProfileScreen';
+import EditPostScreen from './screens/EditPostScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -25,6 +26,7 @@ function MainTabs({ onLogout }) {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
+        headerShown: false,
         tabBarIcon: ({ color, size }) => {
           let iconName;
           if (route.name === 'Home') iconName = 'home-outline';
@@ -68,6 +70,7 @@ export default function App() {
               <Stack.Screen name="SavedPosts" component={SavedPostsScreen} />
               <Stack.Screen name="Search" component={SearchScreen} />
               <Stack.Screen name="Notifications" component={NotificationsScreen} />
+              <Stack.Screen name="EditPostScreen" component={EditPostScreen} />
             </>
           ) : (
             <>

@@ -3,10 +3,12 @@ import { View, Text, Image, StyleSheet, ScrollView, Pressable, Alert, FlatList }
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { AppContext } from '../context/AppContext';
+import { router } from 'expo-router';
 
 const UserProfileScreen = ({ route, navigation }) => {
-  const { posts } = useContext(AppContext);
-  const user = route?.params?.user;
+  const { posts, users } = useContext(AppContext);
+  const userId = route?.params?.user?.id;
+  const user = users.find(u => u.id === userId);
   const [isFollowing, setIsFollowing] = useState(false);
   const [isBlocked, setIsBlocked] = useState(false);
 
@@ -25,7 +27,7 @@ const UserProfileScreen = ({ route, navigation }) => {
   }
 
   // Lọc bài đăng của user này
-  const userPosts = posts.filter(post => post.user?.id === user.id);
+  const userPosts = posts.filter(post => post.userId === user.id);
 
   const handleFollow = () => {
     setIsFollowing(!isFollowing);
@@ -36,7 +38,7 @@ const UserProfileScreen = ({ route, navigation }) => {
   };
 
   const handleMessage = () => {
-    Alert.alert('Nhắn tin', 'Tính năng nhắn tin sẽ được cập nhật sớm!');
+    router.push(`/messages/${user.id}`);
   };
 
   const handleBlock = () => {
@@ -85,7 +87,7 @@ const UserProfileScreen = ({ route, navigation }) => {
               <View style={styles.onlineIndicator} />
             </View>
             <View style={styles.userInfo}>
-              <Text style={styles.userName}>{user.name}</Text>
+              <Text style={styles.userName}>{user.username || user.name}</Text>
               <Text style={styles.userStatus}>Đang hoạt động</Text>
               <View style={styles.statsRow}>
                 <View style={styles.stat}>

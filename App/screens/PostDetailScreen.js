@@ -1,15 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, ScrollView, Pressable, TextInput, Alert, Share } from 'react-native';
 import * as Linking from 'expo-linking';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
+import { AppContext } from '../context/AppContext';
+import { useNavigation } from '@react-navigation/native';
 
-const PostDetailScreen = ({ route, navigation }) => {
+const PostDetailScreen = ({ route }) => {
   const post = route?.params?.post;
+  const { comments: allComments, addComment, user, users } = useContext(AppContext);
   const [isLiked, setIsLiked] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
   const [commentText, setCommentText] = useState('');
-  const [comments, setComments] = useState(post?.comments || []);
+  // Lấy comments thực tế từ context theo postId
+  const postComments = allComments.filter(c => c.postId === post?.id);
+  const [comments, setComments] = useState(postComments);
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    setComments(allComments.filter(c => c.postId === post?.id));
+  }, [allComments, post?.id]);
 
   if (!post) {
     return (
@@ -45,20 +55,21 @@ const PostDetailScreen = ({ route, navigation }) => {
     }
   };
 
-  const handleAddComment = () => {
+  const handleAddComment = async () => {
     if (!commentText.trim()) {
       Alert.alert('Lỗi', 'Vui lòng nhập nội dung bình luận!');
       return;
     }
-
     const newComment = {
-      id: Date.now().toString(),
-      user: 'Bạn',
-      text: commentText.trim(),
+      postId: post.id,
+      userId: user?.id,
+      user: user?.username || user?.name || 'Bạn',
+      content: commentText.trim(),
       createdAt: new Date().toISOString(),
     };
-
-    setComments([newComment, ...comments]);
+    if (typeof addComment === 'function') {
+      await addComment(post.id, newComment);
+    }
     setCommentText('');
     Alert.alert('Thành công', 'Đã thêm bình luận!');
   };
@@ -104,6 +115,12 @@ const PostDetailScreen = ({ route, navigation }) => {
     }
   };
 
+  // Lấy user mới nhất cho post
+  const postUser = post.user && post.user.username ? post.user : users.find(u => String(u.id) === String(post.userId));
+
+  // Giả sử user là chủ bài viết
+  const isOwner = true; // TODO: thay bằng logic kiểm tra chủ bài viết thực tế
+
   return (
     <LinearGradient colors={['#a1c4fd', '#c2e9fb']} style={styles.gradient}>
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
@@ -111,13 +128,13 @@ const PostDetailScreen = ({ route, navigation }) => {
         <View style={styles.headerCard}>
           <Pressable 
             style={styles.userSection} 
-            onPress={() => navigation.navigate('UserProfile', { user: post.user })}
+            onPress={() => navigation.navigate('UserProfile', { user: postUser })}
           >
             <View style={styles.userAvatar}>
               <Ionicons name="person" size={24} color="#1976d2" />
             </View>
             <View style={styles.userInfo}>
-              <Text style={styles.userName}>{post.user?.name || 'User'}</Text>
+              <Text style={styles.userName}>{postUser?.username || postUser?.name || postUser?.email || 'Ẩn danh'}</Text>
               <Text style={styles.postTime}>
                 {new Date(post.createdAt).toLocaleDateString('vi-VN', {
                   year: 'numeric',
@@ -133,6 +150,13 @@ const PostDetailScreen = ({ route, navigation }) => {
           <Pressable style={styles.backBtn} onPress={() => navigation.goBack()}>
             <Ionicons name="close" size={24} color="#666" />
           </Pressable>
+          {/* Nút Sửa bài đăng, chỉ hiện nếu là bài của user hiện tại */}
+          {isOwner && (
+            <Pressable style={styles.editBtn} onPress={() => navigation.navigate('EditPostScreen', { post })}>
+              <Ionicons name="create-outline" size={22} color="#1976d2" />
+              <Text style={styles.editBtnText}>Sửa</Text>
+            </Pressable>
+          )}
         </View>
 
         {/* Main Image */}
@@ -171,6 +195,7 @@ const PostDetailScreen = ({ route, navigation }) => {
                     <View style={styles.linkIndicator}>
                       <Ionicons name="link-outline" size={14} color="#4caf50" />
                     </View>
+                    <Text style={styles.productLinkText}>Xem sản phẩm</Text>
                   </Pressable>
                 ) : (
                   <View key={index} style={styles.tagItem}>
@@ -235,7 +260,7 @@ const PostDetailScreen = ({ route, navigation }) => {
                     <Text style={[styles.commentUserName, comment.user === 'Bạn' && styles.myCommentName]}>
                       {comment.user}
                     </Text>
-                    <Text style={styles.commentText}>{comment.text}</Text>
+                    <Text style={styles.commentText}>{comment.content}</Text>
                     <Text style={styles.commentTime}>
                       {new Date(comment.createdAt).toLocaleDateString('vi-VN')}
                     </Text>
@@ -545,6 +570,29 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
     fontSize: 16,
+  },
+  productLinkText: {
+    color: '#1976d2',
+    fontWeight: 'bold',
+    marginLeft: 8,
+    textDecorationLine: 'underline',
+    fontSize: 13,
+  },
+  editBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#e3f2fd',
+    borderRadius: 8,
+    paddingVertical: 6,
+    paddingHorizontal: 14,
+    marginLeft: 8,
+    alignSelf: 'center',
+  },
+  editBtnText: {
+    color: '#1976d2',
+    fontWeight: 'bold',
+    marginLeft: 6,
+    fontSize: 15,
   },
 });
 

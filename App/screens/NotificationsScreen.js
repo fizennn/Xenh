@@ -1,82 +1,45 @@
-import React from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
-import { Ionicons } from '@expo/vector-icons';
+import React, { useContext, useState } from 'react';
+import { View, Text, FlatList, RefreshControl, StyleSheet } from 'react-native';
+import { AppContext } from '../context/AppContext';
 
-const NotificationsScreen = ({ route }) => {
-  const notifications = route?.params?.notifications || [];
+const NotificationsScreen = () => {
+  const { notifications, loading } = useContext(AppContext);
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = async () => {
+    setRefreshing(true);
+    // Nếu muốn fetch lại từ server, có thể gọi hàm fetchNotifications ở đây nếu có
+    setRefreshing(false);
+  };
+
+  const renderItem = ({ item }) => (
+    <View style={styles.item}>
+      <Text style={styles.title}>{item.title}</Text>
+      <Text>{item.body}</Text>
+      <Text style={styles.time}>{new Date(item.createdAt).toLocaleString()}</Text>
+    </View>
+  );
 
   return (
-    <LinearGradient colors={['#a1c4fd', '#c2e9fb']} style={styles.gradient}>
-      <View style={styles.card}>
-        <Text style={styles.title}>Thông báo</Text>
-        {notifications.length === 0 ? (
-          <Text style={styles.empty}>Chưa có thông báo nào.</Text>
-        ) : (
-          <FlatList
-            data={notifications}
-            keyExtractor={item => item.id}
-            renderItem={({ item }) => (
-              <View style={styles.row}>
-                <Ionicons name="notifications-outline" size={20} color="#1976d2" style={{ marginRight: 8 }} />
-                <Text style={styles.item}>{item.content}</Text>
-              </View>
-            )}
-          />
-        )}
-      </View>
-    </LinearGradient>
+    <View style={styles.container}>
+      <FlatList
+        data={notifications}
+        keyExtractor={item => item.id.toString()}
+        renderItem={renderItem}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+        ListEmptyComponent={<Text>Không có thông báo nào.</Text>}
+      />
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  gradient: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingVertical: 24,
-  },
-  card: {
-    width: '92%',
-    backgroundColor: '#fff',
-    borderRadius: 24,
-    padding: 28,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.15,
-    shadowRadius: 16,
-    elevation: 8,
-    alignItems: 'center',
-  },
-  title: {
-    fontSize: 26,
-    fontWeight: 'bold',
-    color: '#1976d2',
-    marginBottom: 24,
-    letterSpacing: 1,
-    textAlign: 'center',
-  },
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    width: 240,
-    marginBottom: 2,
-  },
-  item: {
-    fontSize: 16,
-    color: '#222',
-    paddingVertical: 10,
-    paddingHorizontal: 8,
-    borderBottomWidth: 1,
-    borderBottomColor: '#eee',
-    flex: 1,
-  },
-  empty: {
-    fontSize: 16,
-    color: '#888',
-    textAlign: 'center',
-    marginTop: 32,
-  },
+  container: { flex: 1, backgroundColor: '#fff', padding: 16 },
+  item: { padding: 12, borderBottomWidth: 1, borderBottomColor: '#eee' },
+  title: { fontWeight: 'bold', fontSize: 16 },
+  time: { color: '#888', fontSize: 12, marginTop: 4 }
 });
 
 export default NotificationsScreen; 

@@ -1,0 +1,1251 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "mai_nguyen",
+      "email": "mai@gmail.com",
+      "password": "mai123",
+      "avatar": "https://i.pinimg.com/736x/99/b4/7a/99b47a886fcc78de5082efa61206e5ee.jpg",
+      "bio": "Stylist chuyên nghiệp, yêu thích phong cách tối giản "
+    },
+    {
+      "id": "2",
+      "username": "hung_tran",
+      "email": "hung@outlook.com",
+      "password": "hung456",
+      "avatar": "https://i.pinimg.com/736x/d1/06/24/d10624225b606dac3d9f3b8b038603d1.jpg",
+      "bio": "Fashion blogger, đam mê streetwear và vintage style"
+    },
+    {
+      "id": "3",
+      "username": "linh_pham",
+      "email": "linh@yahoo.com",
+      "password": "linh789",
+      "avatar": "https://i.pinimg.com/736x/99/b4/7a/99b47a886fcc78de5082efa61206e5ee.jpg",
+      "bio": "Graphic designer, thích mix-match màu sắc độc đáo"
+    },
+    {
+      "id": "4",
+      "username": "duc_le",
+      "email": "duc@gmail.com",
+      "password": "duc321",
+      "avatar": "https://i.pinimg.com/736x/d1/06/24/d10624225b606dac3d9f3b8b038603d1.jpg",
+      "bio": "Kiến trúc sư, theo đuổi phong cách minimalist"
+    },
+    {
+      "id": "5",
+      "username": "anh_vo",
+      "email": "anh@hotmail.com",
+      "password": "anh654",
+      "avatar": "https://i.pinimg.com/736x/d1/06/24/d10624225b606dac3d9f3b8b038603d1.jpg",
+      "bio": "Nghệ sĩ độc lập, yêu thích phong cách boho và vintage"
+    },
+    {
+      "id": "6",
+      "username": "thanh_nguyen",
+      "email": "thanh@gmail.com",
+      "password": "thanh987",
+      "avatar": "https://i.pinimg.com/736x/d1/06/24/d10624225b606dac3d9f3b8b038603d1.jpg",
+      "bio": "Photographer, chuyên chụp street fashion"
+    },
+    {
+      "id": "7",
+      "username": "sophia_tran",
+      "email": "sophia@company.com",
+      "password": "sophia12",
+      "avatar": "https://i.pinimg.com/736x/99/b4/7a/99b47a886fcc78de5082efa61206e5ee.jpg",
+      "bio": "Marketing executive, thích phong cách thanh lịch và chuyên nghiệp"
+    },
+    {
+      "id": "8",
+      "username": "kevin_pham",
+      "email": "kevin@fitness.com",
+      "password": "kevin34",
+      "avatar": "https://i.pinimg.com/736x/99/b4/7a/99b47a886fcc78de5082efa61206e5ee.jpg",
+      "bio": "Personal trainer, đam mê athleisure và sportswear"
+    },
+    {
+      "id": "9",
+      "username": "minh_le",
+      "email": "minh@vintage.com",
+      "password": "minh56",
+      "avatar": "https://i.pinimg.com/736x/99/b4/7a/99b47a886fcc78de5082efa61206e5ee.jpg",
+      "bio": "Collector đồ vintage, chuyên gia về thời trang thập niên 80-90"
+    },
+    {
+      "id": "10",
+      "username": "student_fashion",
+      "email": "student@fashionuni.edu",
+      "password": "stud78",
+      "avatar": "https://i.pinimg.com/736x/99/b4/7a/99b47a886fcc78de5082efa61206e5ee.jpg",
+      "bio": "Sinh viên thiết kế thời trang, thích thử nghiệm xu hướng mới"
+    },
+    {
+      "id": "11",
+      "username": "nam_hoang",
+      "email": "nam@law.com",
+      "password": "nam901",
+      "avatar": "https://i.pinimg.com/736x/d1/06/24/d10624225b606dac3d9f3b8b038603d1.jpg",
+      "bio": "Luật sư, theo đuổi phong cách gentlemen cổ điển"
+    },
+    {
+      "id": "12",
+      "username": "artist_colors",
+      "email": "artist@gmail.com",
+      "password": "art234",
+      "avatar": "https://i.pinimg.com/736x/d1/06/24/d10624225b606dac3d9f3b8b038603d1.jpg",
+      "bio": "Họa sĩ, thích sử dụng màu sắc táo bạo trong outfit"
+    },
+    {
+      "id": "13",
+      "username": "manager_office",
+      "email": "manager@corporate.com",
+      "password": "mgr567",
+      "avatar": "https://i.pinimg.com/736x/d1/06/24/d10624225b606dac3d9f3b8b038603d1.jpg",
+      "bio": "Quản lý dự án, chuyên gia về business casual"
+    },
+    {
+      "id": "14",
+      "username": "outdoor_lover",
+      "email": "outdoor@adventure.com",
+      "password": "out890",
+      "avatar": "https://i.pinimg.com/736x/d1/06/24/d10624225b606dac3d9f3b8b038603d1.jpg",
+      "bio": "Travel blogger, thích phong cách casual và practical"
+    },
+    {
+      "id": "15",
+      "username": "nightlife_style",
+      "email": "nightlife@party.com",
+      "password": "night23",
+      "avatar": "https://i.pinimg.com/736x/d1/06/24/d10624225b606dac3d9f3b8b038603d1.jpg",
+      "bio": "Event coordinator, chuyên gia về party và evening wear"
+    }
+  ],
+  "posts": [
+    {
+      "id": "1",
+      "userId": 1,
+      "image": "https://i.pinimg.com/736x/63/de/78/63de783e81a9d481fe3a903e2d0b70f2.jpg",
+      "caption": "Minimalist chic cho ngày đầu tuần! Áo blazer oversized + quần âu ống rộng + giày loafer da bò. Less is more! 🤍 #MinimalistStyle #MondayMotivation",
+      "likes": 247,
+      "createdAt": "2024-11-15T08:30:00Z"
+    },
+    {
+      "id": "2",
+      "userId": 2,
+      "image": "https://i.pinimg.com/736x/09/1b/2a/091b2a9b993d90cf32dc02ff880cf197.jpg",
+      "caption": "Vintage vibes với áo bomber jacket thập niên 90 + mom jeans + Doc Martens. Thời trang cũ mà vẫn trendy! 🔥 #VintageStyle #90sFashion",
+      "likes": 156,
+      "createdAt": "2024-11-14T15:45:00Z"
+    },
+    {
+      "id": "3",
+      "userId": 3,
+      "image": "https://i.pinimg.com/736x/c6/2d/60/c62d608efc78fbee34e9f6db6bcd9a1c.jpg",
+      "caption": "Color blocking experiment: áo len cam + chân váy xanh navy + boots vàng. Ai bảo không được mix màu tương phản? 🌈 #ColorBlocking #CreativeStyle",
+      "likes": 89,
+      "createdAt": "2024-11-13T12:20:00Z"
+    },
+    {
+      "id": "4",
+      "userId": 4,
+      "image": "https://i.pinimg.com/736x/11/d5/9a/11d59a94c479a8f831e836ce148dcb03.jpg",
+      "caption": "Clean lines và neutral tones cho một ngày làm việc hiệu quả. Áo sơ mi trắng + quần tây xám + sneaker trắng. #WorkWear #Minimalism",
+      "likes": 203,
+      "createdAt": "2024-11-12T07:15:00Z"
+    },
+    {
+      "id": "5",
+      "userId": 5,
+      "image": "https://i.pinimg.com/736x/0d/56/c6/0d56c6ebadb2ff71f8f19b0a9f46e8bd.jpg",
+      "caption": "Boho chic cho buổi brunch cuối tuần! Đầm maxi hoa + kimono cardigan + sandal da. Tự do và thoải mái 🌸 #BohoStyle #WeekendVibes",
+      "likes": 178,
+      "createdAt": "2024-11-11T10:30:00Z"
+    },
+    {
+      "id": "6",
+      "userId": 6,
+      "image": "https://i.pinimg.com/736x/48/a2/f1/48a2f1694191e5acb32fa57552e259ac.jpg",
+      "caption": "Street photography session outfit: áo hoodie oversize + cargo pants + chunky sneakers. Comfortable mà vẫn stylish! 📸 #StreetWear #Photography",
+      "likes": 134,
+      "createdAt": "2024-11-10T16:00:00Z"
+    },
+    {
+      "id": "7",
+      "userId": 7,
+      "image": "https://i.pinimg.com/736x/05/25/1c/05251c42eb5bb87284fcb95f8be0b182.jpg",
+      "caption": "Business meeting ready! Blazer structured + pencil skirt + pointed heels. Power dressing at its finest 💼 #BusinessStyle #PowerDressing",
+      "likes": 267,
+      "createdAt": "2024-11-09T08:00:00Z"
+    },
+    {
+      "id": "8",
+      "userId": 8,
+      "image": "https://i.pinimg.com/736x/57/b6/93/57b6935f2a65f7e884071ad62ce5b39e.jpg",
+      "caption": "Gym to street transition: leggings + oversized tee + bomber jacket + white sneakers. Athleisure done right! 💪 #Athleisure #GymStyle",
+      "likes": 192,
+      "createdAt": "2024-11-08T18:30:00Z"
+    },
+    {
+      "id": "9",
+      "userId": 9,
+      "image": "https://i.pinimg.com/736x/aa/d5/ed/aad5edd4e987c4f5e487ebbe47a30202.jpg",
+      "caption": "Thrift store finds: áo sơ mi vintage + quần jeans cổ điển + giày oxford. Sustainable fashion is the future! ♻️ #VintageFinds #SustainableFashion",
+      "likes": 145,
+      "createdAt": "2024-11-07T13:45:00Z"
+    },
+    {
+      "id": "10",
+      "userId": 10,
+      "image": "https://i.pinimg.com/736x/b6/34/26/b634265c8f41adeaa9c9809b46e4d4df.jpg",
+      "caption": "Experimental look cho fashion week: áo crop top + high-waisted pants + statement accessories. Pushing boundaries! 🎨 #ExperimentalFashion #FashionWeek",
+      "likes": 98,
+      "createdAt": "2024-11-06T20:15:00Z"
+    },
+    {
+      "id": "11",
+      "userId": 11,
+      "image": "https://i.pinimg.com/736x/6f/80/cc/6f80cc28ffa8eb07de0fdf98958f9bfc.jpg",
+      "caption": "Classic gentleman: suit ba mảnh + pocket square + oxford shoes. Timeless elegance never goes out of style 🎩 #GentlemanStyle #ClassicMenswear",
+      "likes": 289,
+      "createdAt": "2024-11-05T09:30:00Z"
+    },
+    {
+      "id": "12",
+      "userId": 12,
+      "image": "https://i.pinimg.com/736x/ab/16/e3/ab16e3a09caeb6f494e477c4322bc4ce.jpg",
+      "caption": "Art gallery opening outfit: áo blouse họa tiết + quần palazzo + giày block heels. Artistic and comfortable! 🎨 #ArtistStyle #GalleryNight",
+      "likes": 167,
+      "createdAt": "2024-11-04T19:00:00Z"
+    },
+    {
+      "id": "13",
+      "userId": 13,
+      "image": "https://i.pinimg.com/736x/90/9c/3b/909c3bd0df19e8cd67e16b7d6b5d0d0c.jpg",
+      "caption": "Smart casual cho client meeting: áo knit + quần tây + loafers. Professional yet approachable 👔 #SmartCasual #ClientMeeting",
+      "likes": 223,
+      "createdAt": "2024-11-03T11:15:00Z"
+    },
+    {
+      "id": "14",
+      "userId": 14,
+      "image": "https://i.pinimg.com/736x/19/b2/e1/19b2e1bbd6650405edb5348e7e86083c.jpg",
+      "caption": "Travel day essentials: comfortable joggers + breathable tee + lightweight jacket + comfy sneakers. Style meets functionality! ✈️ #TravelStyle #Comfort",
+      "likes": 156,
+      "createdAt": "2024-11-02T06:45:00Z"
+    },
+    {
+      "id": "15",
+      "userId": 15,
+      "image": "https://i.pinimg.com/736x/19/f7/b8/19f7b878ba9339796c3f3ef3378dd043.jpg",
+      "caption": "Saturday night fever: sequin top + leather pants + heeled boots. Ready to dance the night away! 🌙 #NightOut #PartyStyle",
+      "likes": 234,
+      "createdAt": "2024-11-01T22:30:00Z"
+    },
+    {
+      "id": "101",
+      "userId": 1,
+      "image": "https://i.pinimg.com/736x/63/de/78/63de783e81a9d481fe3a903e2d0b70f2.jpg",
+      "caption": "Outfit tối giản cho ngày mới! #minimal",
+      "likes": 12,
+      "createdAt": "2024-11-16T08:00:00Z"
+    },
+    {
+      "id": "102",
+      "userId": 1,
+      "image": "https://i.pinimg.com/736x/0d/56/c6/0d56c6ebadb2ff71f8f19b0a9f46e8bd.jpg",
+      "caption": "Mix blazer với quần jeans, bạn đã thử chưa?",
+      "likes": 8,
+      "createdAt": "2024-11-15T10:00:00Z"
+    },
+    {
+      "id": "103",
+      "userId": 2,
+      "image": "https://i.pinimg.com/736x/09/1b/2a/091b2a9b993d90cf32dc02ff880cf197.jpg",
+      "caption": "Vintage vibes cho cuối tuần.",
+      "likes": 20,
+      "createdAt": "2024-11-16T11:00:00Z"
+    },
+    {
+      "id": "104",
+      "userId": 2,
+      "image": "https://i.pinimg.com/736x/dc/76/4d/dc764d88745393554025bdc33c4653f8.jpg",
+      "caption": "Áo bomber jacket thập niên 90.",
+      "likes": 7,
+      "createdAt": "2024-11-15T13:00:00Z"
+    },
+    {
+      "id": "105",
+      "userId": 3,
+      "image": "https://i.pinimg.com/736x/c6/2d/60/c62d608efc78fbee34e9f6db6bcd9a1c.jpg",
+      "caption": "Color block cho ngày mới.",
+      "likes": 9,
+      "createdAt": "2024-11-16T12:00:00Z"
+    },
+    {
+      "id": "106",
+      "userId": 3,
+      "image": "https://i.pinimg.com/736x/7f/5b/87/7f5b873673d2ab383de95f29509a9bfc.jpg",
+      "caption": "Áo len cam nổi bật.",
+      "likes": 5,
+      "createdAt": "2024-11-15T14:00:00Z"
+    },
+    {
+      "id": "107",
+      "userId": 4,
+      "image": "https://i.pinimg.com/736x/11/d5/9a/11d59a94c479a8f831e836ce148dcb03.jpg",
+      "caption": "Clean lines cho ngày làm việc hiệu quả.",
+      "likes": 18,
+      "createdAt": "2024-11-16T13:00:00Z"
+    },
+    {
+      "id": "108",
+      "userId": 4,
+      "image": "https://i.pinimg.com/736x/3a/31/93/3a3193eab859e5caa6759dff1d10353f.jpg",
+      "caption": "Áo sơ mi trắng + quần tây xám.",
+      "likes": 10,
+      "createdAt": "2024-11-15T15:00:00Z"
+    },
+    {
+      "id": "109",
+      "userId": 5,
+      "image": "https://i.pinimg.com/736x/0d/56/c6/0d56c6ebadb2ff71f8f19b0a9f46e8bd.jpg",
+      "caption": "Boho chic cho buổi brunch.",
+      "likes": 14,
+      "createdAt": "2024-11-16T14:00:00Z"
+    },
+    {
+      "id": "110",
+      "userId": 5,
+      "image": "https://i.pinimg.com/736x/c3/5a/fe/c35afe5d74af528a03817837e7bb4071.jpg",
+      "caption": "Đầm maxi hoa tự do.",
+      "likes": 8,
+      "createdAt": "2024-11-15T16:00:00Z"
+    },
+    {
+      "id": "111",
+      "userId": 6,
+      "image": "https://i.pinimg.com/736x/48/a2/f1/48a2f1694191e5acb32fa57552e259ac.jpg",
+      "caption": "Street style với hoodie oversize.",
+      "likes": 11,
+      "createdAt": "2024-11-16T15:00:00Z"
+    },
+    {
+      "id": "112",
+      "userId": 6,
+      "image": "https://i.pinimg.com/736x/05/d5/69/05d569bdc1af6bdb1ccb1ca54ec15b34.jpg",
+      "caption": "Cargo pants cho ngày năng động.",
+      "likes": 6,
+      "createdAt": "2024-11-15T17:00:00Z"
+    },
+    {
+      "id": "113",
+      "userId": 7,
+      "image": "https://i.pinimg.com/736x/05/25/1c/05251c42eb5bb87284fcb95f8be0b182.jpg",
+      "caption": "Business meeting ready!",
+      "likes": 13,
+      "createdAt": "2024-11-16T16:00:00Z"
+    },
+    {
+      "id": "114",
+      "userId": 7,
+      "image": "https://i.pinimg.com/736x/19/5a/e7/195ae7e8fa0eb6811f67f119d05c274f.jpg",
+      "caption": "Blazer structured + pencil skirt.",
+      "likes": 7,
+      "createdAt": "2024-11-15T18:00:00Z"
+    },
+    {
+      "id": "115",
+      "userId": 8,
+      "image": "https://i.pinimg.com/736x/57/b6/93/57b6935f2a65f7e884071ad62ce5b39e.jpg",
+      "caption": "Gym to street: leggings + tee.",
+      "likes": 9,
+      "createdAt": "2024-11-16T17:00:00Z"
+    },
+    {
+      "id": "116",
+      "userId": 8,
+      "image": "https://i.pinimg.com/736x/eb/d0/d7/ebd0d7595d6cfc4411538138aaf82e77.jpg",
+      "caption": "Athleisure done right!",
+      "likes": 5,
+      "createdAt": "2024-11-15T19:00:00Z"
+    },
+    {
+      "id": "117",
+      "userId": 9,
+      "image": "https://i.pinimg.com/736x/aa/d5/ed/aad5edd4e987c4f5e487ebbe47a30202.jpg",
+      "caption": "Thrift store finds cực chất.",
+      "likes": 8,
+      "createdAt": "2024-11-16T18:00:00Z"
+    },
+    {
+      "id": "118",
+      "userId": 9,
+      "image": "https://i.pinimg.com/736x/8f/69/ed/8f69ed3bddc1d7bd6d43af0ff995ac5d.jpg",
+      "caption": "Áo sơ mi vintage + jeans.",
+      "likes": 4,
+      "createdAt": "2024-11-15T20:00:00Z"
+    },
+    {
+      "id": "119",
+      "userId": 10,
+      "image": "https://i.pinimg.com/736x/b6/34/26/b634265c8f41adeaa9c9809b46e4d4df.jpg",
+      "caption": "Experimental look cho fashion week.",
+      "likes": 10,
+      "createdAt": "2024-11-16T19:00:00Z"
+    },
+    {
+      "id": "120",
+      "userId": 10,
+      "image": "https://i.pinimg.com/736x/d1/69/99/d16999993daa4b049a3452d85d92b941.jpg",
+      "caption": "Crop top + high-waisted pants.",
+      "likes": 6,
+      "createdAt": "2024-11-15T21:00:00Z"
+    },
+    {
+      "id": "121",
+      "userId": 11,
+      "image": "https://i.pinimg.com/736x/6f/80/cc/6f80cc28ffa8eb07de0fdf98958f9bfc.jpg",
+      "caption": "Classic gentleman style.",
+      "likes": 12,
+      "createdAt": "2024-11-16T20:00:00Z"
+    },
+    {
+      "id": "122",
+      "userId": 11,
+      "image": "https://i.pinimg.com/736x/d1/06/24/d10624225b606dac3d9f3b8b038603d1.jpg",
+      "caption": "Suit ba mảnh timeless.",
+      "likes": 7,
+      "createdAt": "2024-11-15T22:00:00Z"
+    },
+    {
+      "id": "123",
+      "userId": 12,
+      "image": "https://i.pinimg.com/736x/ab/16/e3/ab16e3a09caeb6f494e477c4322bc4ce.jpg",
+      "caption": "Art gallery opening outfit.",
+      "likes": 11,
+      "createdAt": "2024-11-16T21:00:00Z"
+    },
+    {
+      "id": "124",
+      "userId": 12,
+      "image": "https://i.pinimg.com/736x/d1/06/24/d10624225b606dac3d9f3b8b038603d1.jpg",
+      "caption": "Blouse họa tiết + palazzo.",
+      "likes": 5,
+      "createdAt": "2024-11-15T23:00:00Z"
+    },
+    {
+      "id": "125",
+      "userId": 13,
+      "image": "https://i.pinimg.com/736x/90/9c/3b/909c3bd0df19e8cd67e16b7d6b5d0d0c.jpg",
+      "caption": "Smart casual cho client meeting.",
+      "likes": 13,
+      "createdAt": "2024-11-16T22:00:00Z"
+    },
+    {
+      "id": "126",
+      "userId": 13,
+      "image": "https://i.pinimg.com/736x/d1/06/24/d10624225b606dac3d9f3b8b038603d1.jpg",
+      "caption": "Áo knit + quần tây + loafers.",
+      "likes": 6,
+      "createdAt": "2024-11-15T23:30:00Z"
+    },
+    {
+      "id": "127",
+      "userId": 14,
+      "image": "https://i.pinimg.com/736x/19/b2/e1/19b2e1bbd6650405edb5348e7e86083c.jpg",
+      "caption": "Travel day essentials.",
+      "likes": 8,
+      "createdAt": "2024-11-16T23:00:00Z"
+    },
+    {
+      "id": "128",
+      "userId": 14,
+      "image": "https://i.pinimg.com/736x/d1/06/24/d10624225b606dac3d9f3b8b038603d1.jpg",
+      "caption": "Joggers + tee + jacket.",
+      "likes": 4,
+      "createdAt": "2024-11-15T23:45:00Z"
+    },
+    {
+      "id": "129",
+      "userId": 15,
+      "image": "https://i.pinimg.com/736x/19/f7/b8/19f7b878ba9339796c3f3ef3378dd043.jpg",
+      "caption": "Saturday night fever.",
+      "likes": 10,
+      "createdAt": "2024-11-17T00:00:00Z"
+    },
+    {
+      "id": "130",
+      "userId": 15,
+      "image": "https://i.pinimg.com/736x/d1/06/24/d10624225b606dac3d9f3b8b038603d1.jpg",
+      "caption": "Sequin top + leather pants.",
+      "likes": 6,
+      "createdAt": "2024-11-16T00:30:00Z"
+    },
+    {
+      "id": "8006",
+      "userId": "1",
+      "image": "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540anonymous%252FXenh_App-238123ee-2135-4b14-9013-fbbeb90985a3/ImagePicker/863a6cb4-0ea2-46fc-9bfe-6b154c0ac57f.jpeg",
+      "tags": [
+        {
+          "type": "váy phong cách trung hoa"
+        }
+      ],
+      "caption": "xinh nhức nách",
+      "createdAt": "2025-07-08T12:41:37.501Z",
+      "likes": 0
+    },
+    {
+      "id": "adaf",
+      "userId": "1",
+      "image": "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540anonymous%252FXenh_App-238123ee-2135-4b14-9013-fbbeb90985a3/ImagePicker/d5719b13-4b03-4cea-8585-2ce22fd55798.jpeg",
+      "tags": [
+        {
+          "type": "Váy trung hoa"
+        }
+      ],
+      "caption": "Ảnh đẹp",
+      "createdAt": "2025-07-08T13:03:23.237Z",
+      "likes": 0
+    }
+  ],
+  "items": [
+    {
+      "id": "1",
+      "userId": 1,
+      "name": "Áo Blazer Oversized",
+      "category": "Outerwear",
+      "brand": "Zara",
+      "color": "Beige",
+      "size": "M",
+      "price": 1299000,
+      "image": "https://i.pinimg.com/736x/df/13/02/df130260b48d82206476c36cdd724fd0.jpg",
+      "tags": [
+        "formal",
+        "oversized",
+        "neutral"
+      ]
+    },
+    {
+      "id": "2",
+      "userId": 1,
+      "name": "Quần Âu Ống Rộng",
+      "category": "Pants",
+      "brand": "Mango",
+      "color": "Black",
+      "size": "M",
+      "price": 899000,
+      "image": "https://i.pinimg.com/736x/c7/e7/f2/c7e7f2c6b04e2c5bda8150710be29ad3.jpg",
+      "tags": [
+        "formal",
+        "wide-leg",
+        "classic"
+      ]
+    },
+    {
+      "id": "3",
+      "userId": 2,
+      "name": "Áo Bomber Jacket Vintage",
+      "category": "Outerwear",
+      "brand": "Thrift Store",
+      "color": "Forest Green",
+      "size": "L",
+      "price": 650000,
+      "image": "https://i.pinimg.com/736x/dc/76/4d/dc764d88745393554025bdc33c4653f8.jpg",
+      "tags": [
+        "vintage",
+        "90s",
+        "casual"
+      ]
+    },
+    {
+      "id": "4",
+      "userId": 2,
+      "name": "Quần Jeans Mom Fit",
+      "category": "Pants",
+      "brand": "Levi's",
+      "color": "Light Blue",
+      "size": "M",
+      "price": 1450000,
+      "image": "https://i.pinimg.com/736x/63/d0/17/63d017fae69102d0fd0b51cf54630324.jpg",
+      "tags": [
+        "denim",
+        "mom-fit",
+        "casual"
+      ]
+    },
+    {
+      "id": "5",
+      "userId": 3,
+      "name": "Áo Len Cổ Tròn",
+      "category": "Top",
+      "brand": "Uniqlo",
+      "color": "Orange",
+      "size": "S",
+      "price": 790000,
+      "image": "https://i.pinimg.com/736x/7f/5b/87/7f5b873673d2ab383de95f29509a9bfc.jpg",
+      "tags": [
+        "knitwear",
+        "colorful",
+        "warm"
+      ]
+    },
+    {
+      "id": "6",
+      "userId": 3,
+      "name": "Chân Váy A-Line",
+      "category": "Skirt",
+      "brand": "H&M",
+      "color": "Navy Blue",
+      "size": "S",
+      "price": 559000,
+      "image": "https://i.pinimg.com/736x/84/09/24/84092435df425b6b59f8c8d4bd19a775.jpg",
+      "tags": [
+        "a-line",
+        "formal",
+        "versatile"
+      ]
+    },
+    {
+      "id": "7",
+      "userId": 4,
+      "name": "Áo Sơ Mi Trắng Classic",
+      "category": "Top",
+      "brand": "Muji",
+      "color": "White",
+      "size": "M",
+      "price": 890000,
+      "image": "https://i.pinimg.com/736x/3a/31/93/3a3193eab859e5caa6759dff1d10353f.jpg",
+      "tags": [
+        "classic",
+        "minimal",
+        "formal"
+      ]
+    },
+    {
+      "id": "8",
+      "userId": 4,
+      "name": "Quần Tây Slim Fit",
+      "category": "Pants",
+      "brand": "Zara",
+      "color": "Charcoal",
+      "size": "M",
+      "price": 1099000,
+      "image": "https://i.pinimg.com/736x/5c/b8/8e/5cb88e8a1309bf115ae8087c5760ae1e.jpg",
+      "tags": [
+        "formal",
+        "slim-fit",
+        "professional"
+      ]
+    },
+    {
+      "id": "9",
+      "userId": 5,
+      "name": "Đầm Maxi Hoa",
+      "category": "Dress",
+      "brand": "Free People",
+      "color": "Floral Print",
+      "size": "M",
+      "price": 1890000,
+      "image": "https://i.pinimg.com/736x/c3/5a/fe/c35afe5d74af528a03817837e7bb4071.jpg",
+      "tags": [
+        "boho",
+        "maxi",
+        "floral"
+      ]
+    },
+    {
+      "id": "10",
+      "userId": 5,
+      "name": "Kimono Cardigan",
+      "category": "Outerwear",
+      "brand": "Bohemian Traders",
+      "color": "Cream",
+      "size": "One Size",
+      "price": 1250000,
+      "image": "https://i.pinimg.com/736x/c1/93/38/c19338b9080001cc74866bf63e027719.jpg",
+      "tags": [
+        "boho",
+        "layering",
+        "flowy"
+      ]
+    },
+    {
+      "id": "11",
+      "userId": 6,
+      "name": "Áo Hoodie Oversized",
+      "category": "Top",
+      "brand": "Champion",
+      "color": "Grey",
+      "size": "L",
+      "price": 1150000,
+      "image": "https://i.pinimg.com/736x/05/d5/69/05d569bdc1af6bdb1ccb1ca54ec15b34.jpg",
+      "tags": [
+        "streetwear",
+        "oversized",
+        "casual"
+      ]
+    },
+    {
+      "id": "12",
+      "userId": 6,
+      "name": "Quần Cargo",
+      "category": "Pants",
+      "brand": "Carhartt",
+      "color": "Khaki",
+      "size": "M",
+      "price": 1350000,
+      "image": "https://i.pinimg.com/736x/7d/cd/96/7dcd9611d013a8d2ac75e6fd22bf1078.jpg",
+      "tags": [
+        "utility",
+        "streetwear",
+        "practical"
+      ]
+    },
+    {
+      "id": "13",
+      "userId": 7,
+      "name": "Blazer Structured",
+      "category": "Outerwear",
+      "brand": "Theory",
+      "color": "Navy",
+      "size": "S",
+      "price": 2890000,
+      "image": "https://i.pinimg.com/736x/19/5a/e7/195ae7e8fa0eb6811f67f119d05c274f.jpg",
+      "tags": [
+        "formal",
+        "structured",
+        "professional"
+      ]
+    },
+    {
+      "id": "14",
+      "userId": 7,
+      "name": "Chân Váy Bút Chì",
+      "category": "Skirt",
+      "brand": "Banana Republic",
+      "color": "Black",
+      "size": "S",
+      "price": 1290000,
+      "image": "https://i.pinimg.com/736x/5a/e4/12/5ae41275f9a0ab92bde38fbbf48cd21b.jpg",
+      "tags": [
+        "formal",
+        "pencil",
+        "professional"
+      ]
+    },
+    {
+      "id": "15",
+      "userId": 8,
+      "name": "Leggings Thể Thao",
+      "category": "Pants",
+      "brand": "Lululemon",
+      "color": "Black",
+      "size": "M",
+      "price": 1450000,
+      "image": "https://i.pinimg.com/736x/eb/d0/d7/ebd0d7595d6cfc4411538138aaf82e77.jpg",
+      "tags": [
+        "activewear",
+        "stretch",
+        "gym"
+      ]
+    },
+    {
+      "id": "16",
+      "userId": 8,
+      "name": "Áo Thun Oversized",
+      "category": "Top",
+      "brand": "Nike",
+      "color": "White",
+      "size": "L",
+      "price": 890000,
+      "image": "https://i.pinimg.com/736x/a2/26/90/a22690228e1e760aed7adb5573624ec8.jpg",
+      "tags": [
+        "casual",
+        "oversized",
+        "cotton"
+      ]
+    },
+    {
+      "id": "17",
+      "userId": 9,
+      "name": "Áo Sơ Mi Vintage",
+      "category": "Top",
+      "brand": "Vintage Store",
+      "color": "Striped",
+      "size": "M",
+      "price": 750000,
+      "image": "https://i.pinimg.com/736x/8f/69/ed/8f69ed3bddc1d7bd6d43af0ff995ac5d.jpg",
+      "tags": [
+        "vintage",
+        "striped",
+        "retro"
+      ]
+    },
+    {
+      "id": "18",
+      "userId": 9,
+      "name": "Quần Jeans Cổ Điển",
+      "category": "Pants",
+      "brand": "Lee",
+      "color": "Indigo",
+      "size": "M",
+      "price": 1200000,
+      "image": "https://i.pinimg.com/736x/e1/f6/70/e1f670e1f317231808859506b8c820bf.jpg",
+      "tags": [
+        "classic",
+        "denim",
+        "vintage"
+      ]
+    },
+    {
+      "id": "19",
+      "userId": 10,
+      "name": "Áo Crop Top",
+      "category": "Top",
+      "brand": "Urban Outfitters",
+      "color": "Pink",
+      "size": "S",
+      "price": 650000,
+      "image": "https://i.pinimg.com/736x/d1/69/99/d16999993daa4b049a3452d85d92b941.jpg",
+      "tags": [
+        "trendy",
+        "crop",
+        "experimental"
+      ]
+    },
+    {
+      "id": "20",
+      "userId": 10,
+      "name": "Quần High-Waisted",
+      "category": "Pants",
+      "brand": "ASOS",
+      "color": "Black",
+      "size": "S",
+      "price": 890000,
+      "image": "https://i.pinimg.com/736x/36/ea/39/36ea393335c551750d4fac93fb6edde3.jpg",
+      "tags": [
+        "high-waisted",
+        "trendy",
+        "fitted"
+      ]
+    }
+  ],
+  "wardrobes": [
+    {
+      "id": "1",
+      "userId": 1,
+      "name": "Work Essentials",
+      "description": "Tủ đồ công sở tối giản và thanh lịch",
+      "itemIds": [
+        1,
+        2,
+        7,
+        8
+      ],
+      "createdAt": "2024-10-15T10:00:00Z"
+    },
+    {
+      "id": "2",
+      "userId": 1,
+      "name": "Weekend Casual",
+      "description": "Phong cách cuối tuần thoải mái",
+      "itemIds": [
+        5,
+        6,
+        16
+      ],
+      "createdAt": "2024-10-20T14:30:00Z"
+    },
+    {
+      "id": "3",
+      "userId": 2,
+      "name": "Vintage Collection",
+      "description": "Bộ sưu tập đồ vintage yêu thích",
+      "itemIds": [
+        3,
+        4,
+        17,
+        18
+      ],
+      "createdAt": "2024-10-25T09:15:00Z"
+    },
+    {
+      "id": "4",
+      "userId": 3,
+      "name": "Color Play",
+      "description": "Thử nghiệm với màu sắc và pattern",
+      "itemIds": [
+        5,
+        6,
+        19
+      ],
+      "createdAt": "2024-11-01T16:45:00Z"
+    },
+    {
+      "id": "5",
+      "userId": 4,
+      "name": "Minimalist Wardrobe",
+      "description": "Tủ đồ tối giản, tinh tế",
+      "itemIds": [
+        1,
+        2,
+        7,
+        8
+      ],
+      "createdAt": "2024-11-05T11:20:00Z"
+    },
+    {
+      "id": "6",
+      "userId": 5,
+      "name": "Bohemian Dreams",
+      "description": "Phong cách boho tự do",
+      "itemIds": [
+        9,
+        10
+      ],
+      "createdAt": "2024-11-08T13:00:00Z"
+    },
+    {
+      "id": "7",
+      "userId": 6,
+      "name": "Street Photography Kit",
+      "description": "Outfit cho sessions chụp ảnh",
+      "itemIds": [
+        11,
+        12
+      ],
+      "createdAt": "2024-11-10T15:30:00Z"
+    },
+    {
+      "id": "8",
+      "userId": 7,
+      "name": "Power Suits",
+      "description": "Bộ suit quyền lực cho công việc",
+      "itemIds": [
+        13,
+        14
+      ],
+      "createdAt": "2024-11-12T08:45:00Z"
+    },
+    {
+      "id": "9",
+      "userId": 8,
+      "name": "Athleisure Basics",
+      "description": "Đồ thể thao-casual hàng ngày",
+      "itemIds": [
+        15,
+        16
+      ],
+      "createdAt": "2024-11-14T18:15:00Z"
+    },
+    {
+      "id": "10",
+      "userId": 9,
+      "name": "Thrift Finds",
+      "description": "Những món đồ vintage tuyệt vời",
+      "itemIds": [
+        17,
+        18
+      ],
+      "createdAt": "2024-11-15T12:00:00Z"
+    }
+  ],
+  "favorites": [
+    {
+      "id": "1",
+      "userId": 2,
+      "postId": 1,
+      "createdAt": "2024-11-15T09:00:00Z"
+    },
+    {
+      "id": "2",
+      "userId": 3,
+      "postId": 1,
+      "createdAt": "2024-11-15T09:15:00Z"
+    },
+    {
+      "id": "3",
+      "userId": 4,
+      "postId": 1,
+      "createdAt": "2024-11-15T09:30:00Z"
+    },
+    {
+      "id": "4",
+      "userId": 1,
+      "postId": 2,
+      "createdAt": "2024-11-14T16:00:00Z"
+    },
+    {
+      "id": "5",
+      "userId": 5,
+      "postId": 2,
+      "createdAt": "2024-11-14T16:15:00Z"
+    },
+    {
+      "id": "6",
+      "userId": 6,
+      "postId": 3,
+      "createdAt": "2024-11-13T12:45:00Z"
+    },
+    {
+      "id": "7",
+      "userId": 7,
+      "postId": 4,
+      "createdAt": "2024-11-12T07:30:00Z"
+    },
+    {
+      "id": "8",
+      "userId": 8,
+      "postId": 5,
+      "createdAt": "2024-11-11T11:00:00Z"
+    },
+    {
+      "id": "9",
+      "userId": 9,
+      "postId": 6,
+      "createdAt": "2024-11-10T16:30:00Z"
+    },
+    {
+      "id": "10",
+      "userId": 10,
+      "postId": 7,
+      "createdAt": "2024-11-09T08:30:00Z"
+    }
+  ],
+  "savedPosts": [
+    {
+      "id": "1",
+      "userId": 1,
+      "postId": 7,
+      "createdAt": "2024-11-09T08:45:00Z"
+    },
+    {
+      "id": "2",
+      "userId": 1,
+      "postId": 11,
+      "createdAt": "2024-11-05T10:00:00Z"
+    },
+    {
+      "id": "3",
+      "userId": 2,
+      "postId": 1,
+      "createdAt": "2024-11-15T09:00:00Z"
+    },
+    {
+      "id": "4",
+      "userId": 2,
+      "postId": 5,
+      "createdAt": "2024-11-11T11:00:00Z"
+    },
+    {
+      "id": "5",
+      "userId": 3,
+      "postId": 12,
+      "createdAt": "2024-11-04T19:30:00Z"
+    },
+    {
+      "id": "6",
+      "userId": 4,
+      "postId": 1,
+      "createdAt": "2024-11-15T09:15:00Z"
+    },
+    {
+      "id": "7",
+      "userId": 5,
+      "postId": 9,
+      "createdAt": "2024-11-07T14:00:00Z"
+    },
+    {
+      "id": "8",
+      "userId": 6,
+      "postId": 2,
+      "createdAt": "2024-11-14T16:00:00Z"
+    },
+    {
+      "id": "9",
+      "userId": 7,
+      "postId": 13,
+      "createdAt": "2024-11-03T11:30:00Z"
+    },
+    {
+      "id": "10",
+      "userId": 8,
+      "postId": 8,
+      "createdAt": "2024-11-08T19:00:00Z"
+    },
+    {
+      "id": "794f",
+      "userId": "1",
+      "postId": "12"
+    },
+    {
+      "id": "a5e3",
+      "userId": "1",
+      "postId": "9"
+    },
+    {
+      "id": "40f8",
+      "userId": "1",
+      "postId": "125"
+    }
+  ],
+  "notifications": [
+    {
+      "id": 1,
+      "userId": 1,
+      "title": "Chào mừng bạn đến với Xenh!",
+      "body": "Cảm ơn bạn đã đăng ký tài khoản.",
+      "createdAt": "2024-06-01T10:00:00Z",
+      "read": false
+    },
+    {
+      "id": 2,
+      "userId": 2,
+      "title": "Bài viết mới",
+      "body": "Bài viết của bạn đã được đăng thành công.",
+      "createdAt": "2024-06-02T12:30:00Z",
+      "read": false
+    }
+  ],
+  "comments": [
+    {
+      "id": "1",
+      "postId": 1,
+      "userId": 3,
+      "content": "Quá đẹp! Tôi cũng đang tìm một chiếc blazer như vậy. Có thể cho biết mua ở đâu không?",
+      "createdAt": "2024-11-15T09:15:00Z"
+    },
+    {
+      "id": "2",
+      "postId": 1,
+      "userId": 4,
+      "content": "Phong cách minimalist hoàn hảo! Rất thích cách phối đồ của bạn",
+      "createdAt": "2024-11-15T09:45:00Z"
+    },
+    {
+      "id": "3",
+      "postId": 2,
+      "userId": 1,
+      "content": "Bomber jacket này vintage quá! Thrift store nào vậy bạn?",
+      "createdAt": "2024-11-14T16:30:00Z"
+    },
+    {
+      "id": "4",
+      "postId": 2,
+      "userId": 5,
+      "content": "90s comeback mạnh mẽ! Yêu outfit này",
+      "createdAt": "2024-11-14T17:00:00Z"
+    },
+    {
+      "id": "5",
+      "postId": 3,
+      "userId": 2,
+      "content": "Táo bạo với màu sắc quá! Tôi sẽ thử style này",
+      "createdAt": "2024-11-13T13:15:00Z"
+    },
+    {
+      "id": "6",
+      "postId": 4,
+      "userId": 7,
+      "content": "Clean và professional. Outfit hoàn hảo cho meeting!",
+      "createdAt": "2024-11-12T08:00:00Z"
+    },
+    {
+      "id": "7",
+      "postId": 5,
+      "userId": 8,
+      "content": "Boho style tuyệt vời! Rất phù hợp với mùa thu",
+      "createdAt": "2024-11-11T11:15:00Z"
+    },
+    {
+      "id": "8",
+      "postId": 6,
+      "userId": 9,
+      "content": "Streetwear đúng điệu! Cargo pants đi đâu mua vậy?",
+      "createdAt": "2024-11-10T16:45:00Z"
+    },
+    {
+      "id": "9",
+      "postId": 7,
+      "userId": 10,
+      "content": "Power suit goals! Rất inspirational",
+      "createdAt": "2024-11-09T08:30:00Z"
+    },
+    {
+      "id": "10",
+      "postId": 8,
+      "userId": 11,
+      "content": "Athleisure done right! Comfortable mà vẫn stylish",
+      "createdAt": "2024-11-08T19:15:00Z"
+    },
+    {
+      "id": "5ae7",
+      "postId": "129",
+      "userId": "1",
+      "user": "mai_nguyen",
+      "content": "xấu",
+      "createdAt": "2025-07-08T12:13:20.525Z"
+    },
+    {
+      "id": "1543",
+      "postId": "127",
+      "userId": "1",
+      "user": "mai_nguyen",
+      "content": "xấu",
+      "createdAt": "2025-07-08T13:01:12.435Z"
+    }
+  ],
+  "suggestions": [
+    {
+      "id": "1",
+      "title": "Outfit đi làm hiện đại",
+      "desc": "Blazer beige + quần tây đen + giày cao gót nude - Phong cách chuyên nghiệp mà vẫn trendy"
+    },
+    {
+      "id": "2",
+      "title": "Street style cá tính",
+      "desc": "Áo hoodie oversized + quần jogger + sneaker chunky - Thoải mái nhưng vẫn fashionable"
+    },
+    {
+      "id": "3",
+      "title": "Date night lãng mạn",
+      "desc": "Váy midi hoa + áo cardigan mỏng + giày mary jane - Nữ tính và dễ thương"
+    },
+    {
+      "id": "4",
+      "title": "Phong cách vintage retro",
+      "desc": "Áo sơ mi caro + quần jeans mom fit + giày oxford - Cổ điển nhưng không lỗi thời"
+    },
+    {
+      "id": "5",
+      "title": "Casual cuối tuần",
+      "desc": "Áo thun basic + quần short jeans + sneaker trắng - Đơn giản mà vẫn stylish"
+    },
+    {
+      "id": "6",
+      "title": "Bohemian tự do",
+      "desc": "Đầm maxi hoa + kimono cardigan + sandal da - Phong cách boho chic thoải mái"
+    },
+    {
+      "id": "7",
+      "title": "Athleisure năng động",
+      "desc": "Leggings thể thao + áo crop top + bomber jacket - Sporty nhưng vẫn trendy"
+    },
+    {
+      "id": "8",
+      "title": "Minimalist thanh lịch",
+      "desc": "Áo sơ mi trắng + quần tây xám + giày loafer - Tối giản nhưng tinh tế"
+    },
+    {
+      "id": "9",
+      "title": "Party night glamour",
+      "desc": "Váy sequin + áo blazer + giày cao gót - Nổi bật và quyến rũ"
+    },
+    {
+      "id": "10",
+      "title": "Smart casual meeting",
+      "desc": "Áo knit + quần tây + giày oxford - Chuyên nghiệp mà vẫn gần gũi"
+    }
+  ]
+}

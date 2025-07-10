@@ -2,14 +2,17 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Pressable, Alert } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
+import axios from 'axios';
 
 const RegisterScreen = ({ navigation, onRegister }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const handleRegister = () => {
+  const handleRegister = async () => {
     if (!email || !password || !confirmPassword) {
       Alert.alert('Lỗi', 'Vui lòng nhập đầy đủ thông tin!');
       return;
@@ -19,12 +22,30 @@ const RegisterScreen = ({ navigation, onRegister }) => {
       return;
     }
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      if (typeof onRegister === 'function') {
-        onRegister();
+    try {
+      // Kiểm tra trùng email
+      const res = await axios.get('http://192.168.2.14:3001/users?email=' + encodeURIComponent(email));
+      if (res.data && res.data.length > 0) {
+        setLoading(false);
+        Alert.alert('Lỗi', 'Email đã tồn tại!');
+        return;
       }
-    }, 1000);
+      // Gửi dữ liệu user mới lên server
+              await axios.post('http://192.168.2.14:3001/users', {
+        email,
+        password,
+        username: email.split('@')[0],
+        avatar: '',
+        bio: ''
+      });
+      setLoading(false);
+      Alert.alert('Thành công', 'Đăng ký thành công!');
+      navigation.navigate('Login');
+    } catch (error) {
+      setLoading(false);
+      Alert.alert('Lỗi', 'Không thể đăng ký. Vui lòng thử lại!');
+      console.log('Register error:', error);
+    }
   };
 
   return (
@@ -50,9 +71,12 @@ const RegisterScreen = ({ navigation, onRegister }) => {
             placeholder="Mật khẩu"
             value={password}
             onChangeText={setPassword}
-            secureTextEntry
+            secureTextEntry={!showPassword}
             placeholderTextColor="#888"
           />
+          <Pressable onPress={() => setShowPassword(v => !v)} style={{ padding: 4 }}>
+            <Ionicons name={showPassword ? 'eye-off-outline' : 'eye-outline'} size={20} color="#1976d2" />
+          </Pressable>
         </View>
         <View style={styles.inputBox}>
           <Ionicons name="lock-closed-outline" size={20} color="#1976d2" style={styles.icon} />
@@ -61,9 +85,12 @@ const RegisterScreen = ({ navigation, onRegister }) => {
             placeholder="Nhập lại mật khẩu"
             value={confirmPassword}
             onChangeText={setConfirmPassword}
-            secureTextEntry
+            secureTextEntry={!showConfirmPassword}
             placeholderTextColor="#888"
           />
+          <Pressable onPress={() => setShowConfirmPassword(v => !v)} style={{ padding: 4 }}>
+            <Ionicons name={showConfirmPassword ? 'eye-off-outline' : 'eye-outline'} size={20} color="#1976d2" />
+          </Pressable>
         </View>
         <Pressable
           style={({ pressed }) => [styles.button, pressed && { opacity: 0.7 }]}

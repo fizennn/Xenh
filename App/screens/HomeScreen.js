@@ -4,12 +4,11 @@ import * as Linking from 'expo-linking';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { AppContext } from '../context/AppContext';
+import { router } from 'expo-router';
 
 const HomeScreen = ({ navigation }) => {
-  const [savedPosts, setSavedPosts] = useState([]);
-  const [notifications, setNotifications] = useState([]);
   const [searchText, setSearchText] = useState('');
-  const { posts } = useContext(AppContext);
+  const { posts, savedPosts, notifications, setNotifications, user, addSavedPost, users } = useContext(AppContext);
 
   // Sắp xếp bài đăng theo thời gian mới nhất
   const sortedPosts = [...posts].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
@@ -34,25 +33,26 @@ const HomeScreen = ({ navigation }) => {
     navigation.navigate('PostDetail', { post });
   };
 
-  const handleSavePost = (post) => {
-    if (savedPosts.find(p => p.id === post.id)) {
+  const handleSavePost = async (post) => {
+    if (savedPosts.find(p => p.postId === post.id && p.userId === user?.id)) {
       Alert.alert('Thông báo', 'Bài đăng đã được lưu!');
       return;
     }
-    setSavedPosts([...savedPosts, post]);
-    setNotifications([
-      { id: Date.now().toString(), content: `Bạn đã lưu bài đăng: ${post.user?.name || 'User'}` },
-      ...notifications,
-    ]);
+    const newSaved = { userId: user?.id, postId: post.id };
+    if (typeof addSavedPost === 'function') {
+      await addSavedPost(newSaved);
+    }
+    const newNoti = { id: Date.now().toString(), userId: user?.id, type: 'save', message: `Bạn đã lưu bài đăng: ${post.user?.name || post.user?.username || 'User'}`, createdAt: new Date().toISOString() };
+    setNotifications([newNoti, ...notifications]);
     Alert.alert('Thành công', 'Đã lưu bài đăng!');
   };
 
   const handleGoToSavedPosts = () => {
-    navigation.navigate('SavedPosts', { savedPosts });
+    navigation.navigate('SavedPosts');
   };
 
   const handleGoToNotifications = () => {
-    navigation.navigate('Notifications', { notifications });
+    navigation.navigate('Notifications');
   };
 
   const handleProductLink = async (link) => {
@@ -98,98 +98,123 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <LinearGradient colors={['#a1c4fd', '#c2e9fb']} style={styles.gradient}>
-      <View style={styles.headerCard}>
-        <Text style={styles.title}>Chào mừng bạn đến với Xenh!</Text>
-        <View style={styles.buttonRow}>
-          <Pressable style={({ pressed }) => [styles.button, pressed && { opacity: 0.7 }]} onPress={handleGoToSavedPosts}>
-            <Ionicons name="bookmark-outline" size={18} color="#fff" style={{ marginRight: 6 }} />
-            <Text style={styles.buttonText}>Bài đã lưu</Text>
+      <View style={styles.headerContainer}>
+        <View style={styles.welcomeRow}>
+          <Image
+            source={{ uri: user?.avatar || 'https://i.imgur.com/placeholder.png' }}
+            style={styles.avatar}
+          />
+          <Text style={styles.welcomeText}>
+            Xin chào, <Text style={{ fontWeight: 'bold', color: '#1976d2' }}>{user?.username || 'bạn'}</Text>!
+          </Text>
+        </View>
+        <View style={styles.actionRow}>
+          <Pressable style={styles.actionBtn} onPress={handleGoToSavedPosts}>
+            <Ionicons name="bookmark-outline" size={26} color="#1976d2" />
+            <Text style={styles.actionLabel}>Bài đã lưu</Text>
           </Pressable>
-          <Pressable style={({ pressed }) => [styles.button, pressed && { opacity: 0.7 }]} onPress={handleGoToNotifications}>
-            <Ionicons name="notifications-outline" size={18} color="#fff" style={{ marginRight: 6 }} />
-            <Text style={styles.buttonText}>Thông báo</Text>
+          <Pressable style={styles.actionBtn} onPress={handleGoToNotifications}>
+            <Ionicons name="notifications-outline" size={26} color="#1976d2" />
+            <Text style={styles.actionLabel}>Thông báo</Text>
           </Pressable>
         </View>
-      </View>
-      {/* Search Box */}
-      <View style={styles.searchBox}>
-        <Ionicons name="search" size={20} color="#1976d2" style={{ marginRight: 8 }} />
-        <TextInput
-          style={styles.searchInput}
-          placeholder="Tìm kiếm bài đăng, sản phẩm, người dùng..."
-          placeholderTextColor="#999"
-          value={searchText}
-          onChangeText={setSearchText}
-          returnKeyType="search"
-        />
+        <View style={styles.searchBoxNew}>
+          <Ionicons name="search" size={20} color="#1976d2" style={{ marginRight: 8 }} />
+          <TextInput
+            style={styles.searchInputNew}
+            placeholder="Tìm kiếm bài đăng, sản phẩm, người dùng..."
+            placeholderTextColor="#999"
+            value={searchText}
+            onChangeText={setSearchText}
+            returnKeyType="search"
+          />
+        </View>
       </View>
       <View style={styles.feedCard}>
         <Text style={styles.subtitle}>Bảng tin</Text>
         <FlatList
           data={filteredPosts}
           keyExtractor={item => item.id.toString()}
-          renderItem={({ item }) => (
-            <TouchableOpacity style={styles.postCard} onPress={() => handlePostPress(item)}>
-              <View style={styles.postHeader}>
-                <View style={styles.userInfo}>
-                  <Pressable onPress={() => navigation.navigate('UserProfile', { user: item.user })}>
-                    <Text style={styles.userName}>{item.user?.name || 'User'}</Text>
-                  </Pressable>
-                  <Text style={styles.postTime}>
-                    {new Date(item.createdAt).toLocaleDateString('vi-VN')}
-                  </Text>
-                </View>
-                <Pressable 
-                  style={({ pressed }) => [styles.saveBtn, pressed && { opacity: 0.7 }]} 
-                  onPress={(e) => {
-                    e.stopPropagation();
-                    handleSavePost(item);
-                  }}
-                >
-                  <Ionicons name="bookmark-outline" size={18} color="#1976d2" />
-                </Pressable>
-              </View>
-              
-              {item.image && (
-                <Image 
-                  source={{ uri: item.image }} 
-                  style={styles.postImage}
-                  resizeMode="cover"
-                />
-              )}
-              
-              <View style={styles.postFooter}>
-                <View style={styles.tagsContainer}>
-                  {item.tags?.slice(0, 3).map((tag, index) => (
+          renderItem={({ item }) => {
+            const postUser = item.user;
+            return (
+              <TouchableOpacity style={styles.postCard} onPress={() => handlePostPress(item)}>
+                <View style={styles.postHeader}>
+                  <View style={styles.userInfo}>
+                    <Pressable onPress={() => navigation.navigate('UserProfile', { user: postUser })}>
+                      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                        <Image
+                          source={{ uri: postUser?.avatar || 'https://i.imgur.com/placeholder.png' }}
+                          style={{ width: 28, height: 28, borderRadius: 14, marginRight: 6 }}
+                        />
+                        <Text style={styles.userName}>{postUser?.username || 'Ẩn danh'}</Text>
+                      </View>
+                    </Pressable>
+                    <Text style={styles.postTime}>
+                      {new Date(item.createdAt).toLocaleDateString('vi-VN')}
+                    </Text>
+                  </View>
+                  <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+                    {user?.id !== postUser?.id && postUser && (
+                      <Pressable
+                        style={styles.msgBtn}
+                        onPress={() => router.push(`/messages/${postUser.id}`)}
+                        android_ripple={{ color: '#e3f2fd', borderless: true }}
+                      >
+                        <Ionicons name="chatbubble-ellipses-outline" size={20} color="#1976d2" />
+                      </Pressable>
+                    )}
                     <Pressable 
-                      key={index} 
-                      style={[styles.tag, tag.link && styles.tagWithLink]}
+                      style={({ pressed }) => [styles.saveBtn, pressed && { opacity: 0.7 }]} 
                       onPress={(e) => {
                         e.stopPropagation();
-                        handleProductLink(tag.link);
+                        handleSavePost(item);
                       }}
-                      android_ripple={{ color: '#e0e0e0', borderless: true }}
                     >
-                      <Text style={styles.tagText}>{tag.type}</Text>
-                      {tag.link && (
-                        <Ionicons name="link-outline" size={12} color="#4caf50" style={{ marginLeft: 4 }} />
-                      )}
+                      <Ionicons name="bookmark-outline" size={18} color="#1976d2" />
                     </Pressable>
-                  ))}
-                </View>
-                <View style={styles.statsRow}>
-                  <View style={styles.stat}>
-                    <Ionicons name="heart-outline" size={16} color="#666" />
-                    <Text style={styles.statText}>{item.likes || 0}</Text>
-                  </View>
-                  <View style={styles.stat}>
-                    <Ionicons name="chatbubble-outline" size={16} color="#666" />
-                    <Text style={styles.statText}>{item.comments?.length || 0}</Text>
                   </View>
                 </View>
-              </View>
-            </TouchableOpacity>
-          )}
+                {item.image && (
+                  <Image 
+                    source={{ uri: item.image }} 
+                    style={styles.postImage}
+                    resizeMode="cover"
+                  />
+                )}
+                <View style={styles.postFooter}>
+                  <View style={styles.tagsContainer}>
+                    {item.tags?.slice(0, 3).map((tag, index) => (
+                      <Pressable 
+                        key={index} 
+                        style={[styles.tag, tag.link && styles.tagWithLink]}
+                        onPress={(e) => {
+                          e.stopPropagation();
+                          handleProductLink(tag.link);
+                        }}
+                        android_ripple={{ color: '#e0e0e0', borderless: true }}
+                      >
+                        <Text style={styles.tagText}>{tag.type}</Text>
+                        {tag.link && (
+                          <Ionicons name="link-outline" size={12} color="#4caf50" style={{ marginLeft: 4 }} />
+                        )}
+                      </Pressable>
+                    ))}
+                  </View>
+                  <View style={styles.statsRow}>
+                    <View style={styles.stat}>
+                      <Ionicons name="heart-outline" size={16} color="#666" />
+                      <Text style={styles.statText}>{item.likes || 0}</Text>
+                    </View>
+                    <View style={styles.stat}>
+                      <Ionicons name="chatbubble-outline" size={16} color="#666" />
+                      <Text style={styles.statText}>{item.comments?.length || 0}</Text>
+                    </View>
+                  </View>
+                </View>
+              </TouchableOpacity>
+            );
+          }}
           ListEmptyComponent={<Text style={styles.empty}>Không tìm thấy bài đăng phù hợp.</Text>}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ paddingBottom: 16 }}
@@ -202,78 +227,100 @@ const HomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   gradient: {
     flex: 1,
-    paddingTop: 24,
-    paddingHorizontal: 16,
+    backgroundColor: undefined,
+    // Nền sẽ là LinearGradient xanh như màn upload
   },
-  headerCard: {
+  headerContainer: {
+    paddingTop: 48,
+    paddingHorizontal: 20,
+    paddingBottom: 20,
+    backgroundColor: 'transparent',
+    borderBottomWidth: 1,
+    borderBottomColor: '#dce3ed',
+  },
+  welcomeRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  avatar: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: '#d0dff5',
+    marginRight: 12,
+  },
+  welcomeText: {
+    fontSize: 16,
+    fontWeight: '500',
+    color: '#333',
+  },
+  actionRow: {
+    flexDirection: 'row',
+    gap: 12,
+    marginBottom: 16,
+  },
+  actionBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#ffffff',
+    borderRadius: 16,
+    paddingVertical: 8,
+    paddingHorizontal: 14,
+    borderColor: '#dce3ed',
+    borderWidth: 1,
+  },
+  actionLabel: {
+    marginLeft: 8,
+    fontSize: 14,
+    color: '#1976d2',
+    fontWeight: '600',
+  },
+  searchBoxNew: {
+    flexDirection: 'row',
+    alignItems: 'center',
     backgroundColor: '#fff',
     borderRadius: 20,
-    padding: 20,
-    marginBottom: 16,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 4,
-  },
-  searchBox: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#e3f2fd',
-    borderRadius: 16,
     paddingHorizontal: 16,
-    paddingVertical: 8,
-    marginBottom: 12,
+    paddingVertical: 10,
+    borderWidth: 1,
+    borderColor: '#dce3ed',
   },
-  searchInput: {
+  searchInputNew: {
     flex: 1,
     fontSize: 15,
-    color: '#1976d2',
-    paddingVertical: 4,
-  },
-  buttonRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    gap: 12,
-  },
-  button: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#1976d2',
-    borderRadius: 12,
-    paddingVertical: 10,
-    paddingHorizontal: 16,
-    flex: 1,
-    justifyContent: 'center',
-  },
-  buttonText: {
-    color: '#fff',
-    fontWeight: 'bold',
-    fontSize: 14,
+    color: '#333',
   },
   feedCard: {
     flex: 1,
     backgroundColor: '#fff',
-    borderRadius: 20,
-    padding: 16,
+    borderTopLeftRadius: 28,
+    borderTopRightRadius: 28,
+    paddingHorizontal: 20,
+    paddingTop: 24,
+    paddingBottom: 12,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
+    shadowOffset: { width: 0, height: -1 },
+    shadowOpacity: 0.05,
     shadowRadius: 8,
-    elevation: 4,
+    elevation: 5,
+    marginTop: 14,
+    marginHorizontal: 20,
   },
   subtitle: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: 'bold',
     color: '#1976d2',
-    marginBottom: 16,
     textAlign: 'center',
+    marginBottom: 16,
   },
   postCard: {
-    backgroundColor: '#f8f9fa',
-    borderRadius: 16,
-    marginBottom: 12,
+    backgroundColor: '#ffffff',
+    borderRadius: 18,
+    marginBottom: 16,
     overflow: 'hidden',
+    borderWidth: 1,
+    borderColor: '#edf2fa',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.05,
@@ -283,53 +330,54 @@ const styles = StyleSheet.create({
   postHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
     padding: 12,
+    alignItems: 'center',
   },
   userInfo: {
     flex: 1,
   },
   userName: {
-    fontSize: 16,
-    fontWeight: 'bold',
+    fontSize: 15,
+    fontWeight: '600',
     color: '#1976d2',
     marginBottom: 2,
   },
   postTime: {
     fontSize: 12,
-    color: '#999',
+    color: '#888',
   },
   saveBtn: {
-    padding: 8,
     backgroundColor: '#e3f2fd',
     borderRadius: 8,
+    padding: 6,
   },
   postImage: {
     width: '100%',
     height: 200,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#f2f2f2',
   },
   postFooter: {
-    padding: 12,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
   },
   tagsContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    marginBottom: 8,
-    gap: 6,
+    gap: 8,
+    marginBottom: 10,
   },
   tag: {
-    backgroundColor: '#e3f2fd',
-    borderRadius: 12,
-    paddingHorizontal: 8,
+    backgroundColor: '#e1f0ff',
     paddingVertical: 4,
+    paddingHorizontal: 10,
+    borderRadius: 12,
     flexDirection: 'row',
     alignItems: 'center',
   },
   tagWithLink: {
-    backgroundColor: '#e8f5e8',
-    borderWidth: 1,
+    backgroundColor: '#e9f9ee',
     borderColor: '#4caf50',
+    borderWidth: 1,
   },
   tagText: {
     fontSize: 12,
@@ -338,7 +386,9 @@ const styles = StyleSheet.create({
   },
   statsRow: {
     flexDirection: 'row',
-    gap: 16,
+    justifyContent: 'flex-start',
+    gap: 20,
+    marginTop: 4,
   },
   stat: {
     flexDirection: 'row',
@@ -351,9 +401,15 @@ const styles = StyleSheet.create({
   },
   empty: {
     fontSize: 16,
-    color: '#888',
     textAlign: 'center',
-    marginTop: 32,
+    color: '#999',
+    marginTop: 40,
+  },
+  msgBtn: {
+    backgroundColor: '#e3f2fd',
+    borderRadius: 8,
+    padding: 6,
+    marginRight: 4,
   },
 });
 

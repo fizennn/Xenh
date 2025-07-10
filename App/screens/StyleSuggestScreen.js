@@ -1,33 +1,49 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
-
-const suggestions = [
-  { id: '1', title: 'Phong cách mùa hè', desc: 'Áo phông trắng + Quần short jeans + Giày sneaker' },
-  { id: '2', title: 'Công sở thanh lịch', desc: 'Sơ mi xanh + Quần tây đen + Giày lười' },
-  { id: '3', title: 'Dạo phố năng động', desc: 'Áo thun graphic + Quần jogger + Giày thể thao' },
-];
+import axios from 'axios';
 
 export default function StyleSuggestScreen() {
+  const [suggestions, setSuggestions] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchSuggestions = async () => {
+      try {
+        const res = await axios.get('http://192.168.2.14:3001/suggestions');
+        setSuggestions(res.data);
+      } catch (err) {
+        setSuggestions([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchSuggestions();
+  }, []);
+
   return (
     <LinearGradient colors={['#a1c4fd', '#c2e9fb']} style={styles.gradient}>
       <View style={styles.card}>
         <Text style={styles.title}>Gợi ý phối đồ</Text>
-        <FlatList
-          data={suggestions}
-          keyExtractor={item => item.id}
-          renderItem={({ item }) => (
-            <View style={styles.suggestBox}>
-              <Ionicons name="bulb-outline" size={20} color="#1976d2" style={{ marginRight: 8 }} />
-              <View style={{ flex: 1 }}>
-                <Text style={styles.suggestTitle}>{item.title}</Text>
-                <Text style={styles.suggestDesc}>{item.desc}</Text>
+        {loading ? (
+          <Text>Đang tải...</Text>
+        ) : (
+          <FlatList
+            data={suggestions}
+            keyExtractor={item => item.id.toString()}
+            renderItem={({ item }) => (
+              <View style={styles.suggestBox}>
+                <Ionicons name="bulb-outline" size={20} color="#1976d2" style={{ marginRight: 8 }} />
+                <View style={{ flex: 1 }}>
+                  <Text style={styles.suggestTitle}>{item.title}</Text>
+                  <Text style={styles.suggestDesc}>{item.desc}</Text>
+                </View>
               </View>
-            </View>
-          )}
-          contentContainerStyle={{ paddingBottom: 12 }}
-        />
+            )}
+            contentContainerStyle={{ paddingBottom: 12 }}
+          />
+        )}
       </View>
     </LinearGradient>
   );

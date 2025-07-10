@@ -1,23 +1,31 @@
-import React, { useState, useContext } from 'react';
-import { View, StyleSheet, Image, ActivityIndicator, ScrollView, TouchableOpacity, Modal, Dimensions, Text, Pressable, Alert, PermissionsAndroid, Platform } from 'react-native';
-import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+import { Ionicons } from '@expo/vector-icons';
+import axios from 'axios';
+import * as ImagePicker from 'expo-image-picker';
+import { LinearGradient } from 'expo-linear-gradient';
+import React, { useContext, useState } from 'react';
+import { ActivityIndicator, Alert, Image, Modal, PermissionsAndroid, Platform, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { detectClothesAI } from '../api/ai';
 import { AppContext } from '../context/AppContext';
-import ClothingTagEditor from '../components/ClothingTagEditor';
-import { ThemedText } from '../components/ThemedText';
-import { ThemedView } from '../components/ThemedView';
-import { IconSymbol } from '../components/ui/IconSymbol';
-import { Colors } from '../constants/Colors';
-import { LinearGradient } from 'expo-linear-gradient';
-import { Ionicons } from '@expo/vector-icons';
 
-export default function UploadScreen({ navigation }) {
+export default function UploadScreen({ navigation, route }) {
+  const editingPost = route?.params?.post;
   const [image, setImage] = useState(null);
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
   const { addPost, user } = useContext(AppContext);
-  const [editTags, setEditTags] = useState(null);
+  const [editTags, setEditTags] = useState([]);
   const [showOverlay, setShowOverlay] = useState(false);
+  const [caption, setCaption] = useState('');
+  const [newTag, setNewTag] = useState('');
+
+  // Nếu là sửa bài đăng, fill dữ liệu cũ
+  React.useEffect(() => {
+    if (editingPost) {
+      setImage(editingPost.image ? { uri: editingPost.image } : null);
+      setCaption(editingPost.caption || '');
+      setEditTags(editingPost.tags || []);
+    }
+  }, [editingPost]);
 
   const requestCameraPermission = async () => {
     if (Platform.OS === 'android') {
@@ -66,75 +74,39 @@ export default function UploadScreen({ navigation }) {
   };
 
   const pickImage = async () => {
-    try {
-      const hasPermission = await requestStoragePermission();
-      if (!hasPermission) {
-        Alert.alert('Quyền truy cập', 'Cần quyền truy cập thư viện ảnh để chọn ảnh!');
-        return;
-      }
-
-      const options = {
-        mediaType: 'photo',
-        includeBase64: false,
-        maxHeight: 2000,
-        maxWidth: 2000,
-        quality: 0.8,
-      };
-
-      launchImageLibrary(options, (response) => {
-        if (response.didCancel) {
-          console.log('User cancelled image picker');
-        } else if (response.errorCode) {
-          console.log('ImagePicker Error: ', response.errorMessage);
-          Alert.alert('Lỗi', 'Không thể chọn ảnh. Vui lòng thử lại!');
-        } else if (response.assets && response.assets.length > 0) {
-          const selectedImage = response.assets[0];
-          console.log('Selected image:', selectedImage);
-          setImage(selectedImage);
-          setResult(null);
-          setEditTags(null);
-        }
-      });
-    } catch (error) {
-      console.error('Error picking image:', error);
-      Alert.alert('Lỗi', 'Không thể chọn ảnh. Vui lòng thử lại!');
+    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (status !== 'granted') {
+      Alert.alert('Quyền truy cập', 'Cần quyền truy cập thư viện ảnh để chọn ảnh!');
+      return;
+    }
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      quality: 0.8,
+    });
+    if (!result.canceled && result.assets && result.assets.length > 0) {
+      const selectedImage = result.assets[0];
+      setImage(selectedImage);
+      setResult(null);
+      setEditTags([]);
     }
   };
 
   const takePhoto = async () => {
-    try {
-      const hasPermission = await requestCameraPermission();
-      if (!hasPermission) {
-        Alert.alert('Quyền truy cập', 'Cần quyền truy cập camera để chụp ảnh!');
-        return;
-      }
-
-      const options = {
-        mediaType: 'photo',
-        includeBase64: false,
-        maxHeight: 2000,
-        maxWidth: 2000,
-        quality: 0.8,
-        saveToPhotos: true,
-      };
-
-      launchCamera(options, (response) => {
-        if (response.didCancel) {
-          console.log('User cancelled camera');
-        } else if (response.errorCode) {
-          console.log('Camera Error: ', response.errorMessage);
-          Alert.alert('Lỗi', 'Không thể chụp ảnh. Vui lòng thử lại!');
-        } else if (response.assets && response.assets.length > 0) {
-          const capturedImage = response.assets[0];
-          console.log('Captured image:', capturedImage);
-          setImage(capturedImage);
-          setResult(null);
-          setEditTags(null);
-        }
-      });
-    } catch (error) {
-      console.error('Error taking photo:', error);
-      Alert.alert('Lỗi', 'Không thể chụp ảnh. Vui lòng thử lại!');
+    const { status } = await ImagePicker.requestCameraPermissionsAsync();
+    if (status !== 'granted') {
+      Alert.alert('Quyền truy cập', 'Cần quyền truy cập camera để chụp ảnh!');
+      return;
+    }
+    let result = await ImagePicker.launchCameraAsync({
+      allowsEditing: true,
+      quality: 0.8,
+    });
+    if (!result.canceled && result.assets && result.assets.length > 0) {
+      const capturedImage = result.assets[0];
+      setImage(capturedImage);
+      setResult(null);
+      setEditTags([]);
     }
   };
 
@@ -143,14 +115,14 @@ export default function UploadScreen({ navigation }) {
       Alert.alert('Lỗi', 'Vui lòng chọn hoặc chụp ảnh trước!');
       return;
     }
-    
     setLoading(true);
     setShowOverlay(true);
-    
     try {
       const res = await detectClothesAI(image);
-      setResult(res);
-      setEditTags(res.tags || []);
+      // Chỉ lấy tên trang phục (type) từ kết quả AI
+      const names = (res.tags || []).map(tag => tag.type).filter(Boolean);
+      setEditTags(names.map(name => ({ type: name })));
+      setResult({ names });
     } catch (error) {
       console.error('Error detecting clothes:', error);
       Alert.alert('Lỗi', 'Không thể nhận diện quần áo. Vui lòng thử lại!');
@@ -160,111 +132,182 @@ export default function UploadScreen({ navigation }) {
     }
   };
 
-  const handlePost = () => {
+  const handleCancel = () => {
+    Alert.alert('Xác nhận', 'Bạn có chắc muốn hủy bài đăng?', [
+      { text: 'Không', style: 'cancel' },
+      { text: 'Hủy', style: 'destructive', onPress: () => {
+        setImage(null);
+        setCaption('');
+        setEditTags([]);
+        setResult(null);
+        if (navigation.canGoBack()) {
+          navigation.goBack();
+        } else {
+          navigation.navigate('Home');
+        }
+      }}
+    ]);
+  };
+
+  const handlePost = async () => {
     if (!image) {
       Alert.alert('Lỗi', 'Vui lòng chọn ảnh trước!');
       return;
     }
-    
     if (!editTags || editTags.length === 0) {
-      Alert.alert('Lỗi', 'Vui lòng nhận diện quần áo trước!');
+      Alert.alert('Lỗi', 'Vui lòng thêm ít nhất 1 tag sản phẩm!');
       return;
     }
-
+    if (!user) {
+      Alert.alert('Lỗi', 'Bạn cần đăng nhập để đăng bài!');
+      return;
+    }
+    if (!caption.trim()) {
+      Alert.alert('Lỗi', 'Vui lòng nhập mô tả/caption cho bài đăng!');
+      return;
+    }
     const newPost = {
-      id: Date.now(),
-      user: user || { id: 1, name: 'User Demo' },
+      userId: user.id,
       image: image.uri,
       tags: editTags,
+      caption: caption.trim(),
       createdAt: new Date().toISOString(),
-      likes: 0,
-      comments: [],
+      likes: 0
     };
+    try {
+      if (editingPost) {
+        // Gửi PUT/PATCH lên server để cập nhật bài đăng
+        const updatedPost = {
+          ...editingPost,
+          image: image.uri,
+          tags: editTags,
+          caption: caption.trim(),
+        };
+        await axios.put(`http://192.168.2.14:3001/posts/${editingPost.id}`, updatedPost);
+        addPost(updatedPost); // hoặc cập nhật context đúng cách nếu có hàm updatePost
+        Alert.alert('Thành công', 'Đã cập nhật bài đăng!');
+        navigation.goBack();
+        return;
+      }
+              const res = await axios.post('http://192.168.2.14:3001/posts', newPost);
+      addPost(res.data);
+      Alert.alert('Thành công', 'Đã đăng bài thành công!', [
+        { text: 'OK', onPress: () => {
+          setImage(null);
+          setResult(null);
+          setEditTags([]);
+          setCaption('');
+          navigation.navigate('Home');
+        }}
+      ]);
+    } catch (error) {
+      Alert.alert('Lỗi', 'Không thể đăng bài. Vui lòng thử lại!');
+    }
+  };
 
-    addPost(newPost);
-    
-    Alert.alert('Thành công', 'Đã đăng bài thành công!', [
-      { text: 'OK', onPress: () => {
-        setImage(null);
-        setResult(null);
-        setEditTags(null);
-        navigation.navigate('Home');
-      }}
-    ]);
+  // Thêm tag thủ công
+  const handleAddTag = () => {
+    const name = newTag.trim();
+    if (!name) return;
+    if (editTags.some(t => t.type === name)) return;
+    setEditTags([...editTags, { type: name }]);
+    setNewTag('');
+  };
+  // Xoá tag
+  const handleRemoveTag = (idx) => {
+    setEditTags(editTags.filter((_, i) => i !== idx));
   };
 
   return (
     <LinearGradient colors={['#a1c4fd', '#c2e9fb']} style={styles.gradient}>
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
         <View style={styles.card}>
-          <Text style={styles.title}>Tải ảnh lên & nhận diện</Text>
-          
-          <View style={styles.btnRow}>
-            <Pressable style={({ pressed }) => [styles.button, pressed && { opacity: 0.7 }]} onPress={pickImage}>
-              <Ionicons name="image-outline" size={20} color="#1976d2" style={{ marginRight: 6 }} />
-              <Text style={styles.buttonText}>Chọn ảnh</Text>
-            </Pressable>
-            <Pressable style={({ pressed }) => [styles.button, pressed && { opacity: 0.7 }]} onPress={takePhoto}>
-              <Ionicons name="camera-outline" size={20} color="#1976d2" style={{ marginRight: 6 }} />
-              <Text style={styles.buttonText}>Chụp ảnh</Text>
-            </Pressable>
+          <Text style={styles.title}>Đăng bài mới</Text>
+          {/* Chọn/chụp ảnh */}
+          <View style={{ flexDirection: 'row', justifyContent: 'center', marginBottom: 16 }}>
+            <TouchableOpacity style={styles.imageBtn} onPress={pickImage}>
+              <Ionicons name="image-outline" size={22} color="#1976d2" />
+              <Text style={styles.imageBtnText}>Chọn ảnh</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.imageBtn} onPress={takePhoto}>
+              <Ionicons name="camera-outline" size={22} color="#1976d2" />
+              <Text style={styles.imageBtnText}>Chụp ảnh</Text>
+            </TouchableOpacity>
+          </View>
+          {image && (
+            <Image source={{ uri: image.uri }} style={{ width: '100%', height: 220, borderRadius: 16, marginBottom: 12 }} resizeMode="cover" />
+          )}
+
+          {/* Caption input */}
+          <Text style={styles.label}>Mô tả bài đăng</Text>
+          <TextInput
+            style={styles.captionInput}
+            placeholder="Nhập mô tả/caption cho bài đăng..."
+            value={caption}
+            onChangeText={setCaption}
+            multiline
+            numberOfLines={2}
+          />
+
+          {/* Tag sản phẩm: nhập thủ công + hiển thị tag đẹp */}
+          <Text style={styles.label}>Tag sản phẩm (có thể nhập thủ công)</Text>
+          <View style={styles.tagInputRow}>
+            <TextInput
+              style={styles.tagInput}
+              placeholder="Nhập tên trang phục..."
+              value={newTag}
+              onChangeText={setNewTag}
+              onSubmitEditing={handleAddTag}
+              returnKeyType="done"
+            />
+            <TouchableOpacity style={styles.addTagBtn} onPress={handleAddTag}>
+              <Ionicons name="add-circle-outline" size={22} color="#1976d2" />
+              <Text style={styles.addTagBtnText}>Thêm</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.tagsList}>
+            {editTags.map((tag, idx) => (
+              <View key={idx} style={styles.tagChip}>
+                <Text style={styles.tagChipText}>{tag.type}</Text>
+                <TouchableOpacity onPress={() => handleRemoveTag(idx)}>
+                  <Ionicons name="close-circle" size={18} color="#f44336" />
+                </TouchableOpacity>
+              </View>
+            ))}
           </View>
 
-          {image && (
-            <View style={styles.imageContainer}>
-              <Image source={{ uri: image.uri }} style={styles.image} />
-              <Pressable 
-                style={styles.removeImageBtn} 
-                onPress={() => {
-                  setImage(null);
-                  setResult(null);
-                  setEditTags(null);
-                }}
-              >
-                <Ionicons name="close-circle" size={24} color="#f44336" />
-              </Pressable>
-            </View>
-          )}
-
-          {image && !result && (
-            <Pressable 
-              style={({ pressed }) => [styles.detectBtn, pressed && { opacity: 0.7 }]} 
-              onPress={handleDetect} 
-              disabled={loading}
-            >
-              {loading ? (
-                <ActivityIndicator size="small" color="#fff" style={{ marginRight: 6 }} />
-              ) : (
-                <Ionicons name="search-outline" size={20} color="#fff" style={{ marginRight: 6 }} />
-              )}
-              <Text style={styles.detectBtnText}>
-                {loading ? 'Đang nhận diện...' : 'Nhận diện quần áo'}
-              </Text>
-            </Pressable>
-          )}
-
-          {result && (
-            <View style={styles.resultCard}>
-              <Text style={styles.resultTitle}>Kết quả nhận diện:</Text>
-              <View style={styles.tagsContainer}>
-                {editTags?.map((tag, index) => (
-                  <View key={index} style={styles.tag}>
-                    <Text style={styles.tagText}>{tag.type}</Text>
+          {/* Hiển thị kết quả nhận diện đơn giản */}
+          {result && result.names && result.names.length > 0 && (
+            <View style={{ marginTop: 10, marginBottom: 8 }}>
+              <Text style={{ color: '#1976d2', fontWeight: 'bold', marginBottom: 4 }}>Kết quả nhận diện:</Text>
+              <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}>
+                {result.names.map((name, idx) => (
+                  <View key={idx} style={{ backgroundColor: '#e3f2fd', borderRadius: 12, paddingHorizontal: 12, paddingVertical: 6, marginRight: 6, marginBottom: 6 }}>
+                    <Text style={{ color: '#1976d2', fontWeight: '600' }}>{name}</Text>
                   </View>
                 ))}
               </View>
             </View>
           )}
 
-          {result && editTags && (
-            <Pressable 
-              style={({ pressed }) => [styles.postBtn, pressed && { opacity: 0.7 }]} 
-              onPress={handlePost}
-            >
-              <Ionicons name="cloud-upload-outline" size={20} color="#fff" style={{ marginRight: 6 }} />
-              <Text style={styles.postBtnText}>Đăng bài</Text>
-            </Pressable>
-          )}
+          {/* Nhận diện AI là tuỳ chọn */}
+          <TouchableOpacity style={styles.aiBtn} onPress={handleDetect}>
+            <Ionicons name="sparkles-outline" size={20} color="#fff" />
+            <Text style={styles.aiBtnText}>Nhận diện trang phục (AI)</Text>
+          </TouchableOpacity>
+          {loading && <ActivityIndicator size="small" color="#1976d2" style={{ marginVertical: 8 }} />}
+
+          {/* Nút đăng bài và hủy */}
+          <View style={styles.actionBtnRow}>
+            <TouchableOpacity style={styles.cancelBtn} onPress={handleCancel}>
+              <Ionicons name="close-circle-outline" size={20} color="#f44336" />
+              <Text style={styles.cancelBtnText}>Hủy</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.postBtn} onPress={handlePost}>
+              <Ionicons name="cloud-upload-outline" size={20} color="#fff" />
+              <Text style={styles.postBtnText}>{editingPost ? 'Cập nhật bài đăng' : 'Đăng bài'}</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </ScrollView>
 
@@ -448,5 +491,153 @@ const styles = StyleSheet.create({
     color: '#1976d2',
     marginTop: 12,
     fontWeight: '500',
+  },
+  label: {
+    fontSize: 15,
+    color: '#1976d2',
+    fontWeight: 'bold',
+    marginTop: 16,
+    marginBottom: 4,
+  },
+  captionInput: {
+    borderWidth: 1,
+    borderColor: '#dce3ed',
+    borderRadius: 12,
+    padding: 10,
+    fontSize: 15,
+    backgroundColor: '#fff',
+    marginBottom: 8,
+    color: '#222',
+  },
+  imageBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#e3f2fd',
+    borderRadius: 10,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    marginHorizontal: 8,
+  },
+  imageBtnText: {
+    color: '#1976d2',
+    fontWeight: '600',
+    marginLeft: 6,
+    fontSize: 15,
+  },
+  aiBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#1976d2',
+    borderRadius: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 18,
+    marginTop: 18,
+    marginBottom: 8,
+    alignSelf: 'center',
+  },
+  aiBtnText: {
+    color: '#fff',
+    fontWeight: '600',
+    marginLeft: 8,
+    fontSize: 15,
+  },
+  actionBtnRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 24,
+    gap: 18,
+  },
+  cancelBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    borderRadius: 12,
+    paddingVertical: 14,
+    paddingHorizontal: 28,
+    borderWidth: 2,
+    borderColor: '#f44336',
+    marginHorizontal: 4,
+    minWidth: 120,
+    justifyContent: 'center',
+    elevation: 2,
+  },
+  cancelBtnText: {
+    color: '#f44336',
+    fontWeight: 'bold',
+    marginLeft: 8,
+    fontSize: 16,
+    letterSpacing: 0.5,
+  },
+  postBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#43a047',
+    borderRadius: 12,
+    paddingVertical: 14,
+    paddingHorizontal: 28,
+    marginHorizontal: 4,
+    minWidth: 120,
+    justifyContent: 'center',
+    elevation: 2,
+  },
+  postBtnText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    marginLeft: 8,
+    fontSize: 16,
+    letterSpacing: 0.5,
+  },
+  tagInputRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 8,
+    gap: 8,
+  },
+  tagInput: {
+    flex: 1,
+    borderWidth: 1,
+    borderColor: '#dce3ed',
+    borderRadius: 10,
+    padding: 8,
+    fontSize: 15,
+    backgroundColor: '#fff',
+    color: '#222',
+  },
+  addTagBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#e3f2fd',
+    borderRadius: 8,
+    paddingVertical: 8,
+    paddingHorizontal: 14,
+  },
+  addTagBtnText: {
+    color: '#1976d2',
+    fontWeight: '600',
+    marginLeft: 4,
+    fontSize: 15,
+  },
+  tagsList: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 8,
+    marginBottom: 8,
+  },
+  tagChip: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#e3f2fd',
+    borderRadius: 16,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    marginRight: 6,
+    marginBottom: 6,
+  },
+  tagChipText: {
+    color: '#1976d2',
+    fontWeight: '600',
+    fontSize: 15,
+    marginRight: 4,
   },
 }); 

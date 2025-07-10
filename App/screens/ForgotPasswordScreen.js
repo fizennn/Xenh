@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, StyleSheet, Alert, Pressable } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
+import { AppContext } from '../context/AppContext';
 
 const ForgotPasswordScreen = () => {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
+  const { users } = useContext(AppContext);
 
   const handleSend = () => {
     if (!email || !email.includes('@')) {
@@ -15,9 +17,14 @@ const ForgotPasswordScreen = () => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
+      const found = users.find(u => u.email === email);
+      if (!found) {
+        Alert.alert('Lỗi', 'Email không tồn tại trong hệ thống!');
+        return;
+      }
       Alert.alert('Thành công', 'Yêu cầu đặt lại mật khẩu đã được gửi tới email của bạn!');
       setEmail('');
-    }, 1500);
+    }, 1000);
   };
 
   return (

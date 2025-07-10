@@ -1,34 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, Pressable } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
-
-const mockUser = {
-  email: 'user@email.com',
-  password: '123456',
-};
+import { AppContext } from '../context/AppContext';
 
 const LoginScreen = ({ navigation, onLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const { users, loading: loadingUsers, loginUser } = useContext(AppContext);
 
   const handleLogin = () => {
     if (!email || !password) {
       Alert.alert('Lỗi', 'Vui lòng nhập đầy đủ email và mật khẩu!');
       return;
     }
+    if (loadingUsers) {
+      Alert.alert('Đang tải dữ liệu người dùng, vui lòng đợi...');
+      return;
+    }
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-      if (email === mockUser.email && password === mockUser.password) {
+      console.log('Login attempt:', { email, password });
+      console.log('Current users:', users);
+      const foundUser = users.find(u => u.email === email && u.password === password);
+      console.log('Found user:', foundUser);
+      if (foundUser) {
         if (typeof onLogin === 'function') {
-          onLogin();
+          onLogin(foundUser);
+        }
+        if (typeof loginUser === 'function') {
+          loginUser(foundUser);
         }
       } else {
         Alert.alert('Lỗi', 'Email hoặc mật khẩu không đúng!');
       }
-    }, 1000);
+    }, 500);
   };
 
   return (
@@ -54,9 +63,12 @@ const LoginScreen = ({ navigation, onLogin }) => {
             placeholder="Mật khẩu"
             value={password}
             onChangeText={setPassword}
-            secureTextEntry
+            secureTextEntry={!showPassword}
             placeholderTextColor="#888"
           />
+          <Pressable onPress={() => setShowPassword(v => !v)} style={{ padding: 4 }}>
+            <Ionicons name={showPassword ? 'eye-off-outline' : 'eye-outline'} size={20} color="#1976d2" />
+          </Pressable>
         </View>
         <Pressable
           style={({ pressed }) => [styles.button, pressed && { opacity: 0.7 }]}
