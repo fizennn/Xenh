@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function Login() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('admin@gmail.com');
+  const [password, setPassword] = useState('123456');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ function Login() {
 
     // Simulate loading time
     setTimeout(() => {
-      if (username === 'admin' && password === '12345') {
+      if (username === 'admin@gmail.com' && password === '123456') {
         localStorage.setItem('isAuthenticated', 'true');
         navigate('/');
       } else {
@@ -26,15 +26,15 @@ function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-600 to-pink-500 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-400 to-blue-100 flex items-center justify-center p-4">
       <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md">
         {/* Logo/Header */}
         <div className="text-center mb-8">
-          <div className="bg-gradient-to-r from-purple-600 to-pink-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-            <i className="fas fa-user-shield text-white text-2xl"></i>
+          <div className="bg-gradient-to-r from-blue-400 to-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i className="fas fa-user-shield text-blue-900 text-2xl"></i>
           </div>
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">Xenh Admin</h1>
-          <p className="text-gray-600">Đăng nhập vào trang quản trị</p>
+          <h1 className="text-3xl font-bold text-blue-900 mb-2">Xenh Admin</h1>
+          <p className="text-blue-700">Đăng nhập vào trang quản trị</p>
         </div>
 
         {/* Login Form */}
@@ -81,7 +81,7 @@ function Login() {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-gradient-to-r from-purple-600 to-pink-500 text-white py-3 px-4 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-600 focus:ring-4 focus:ring-purple-300 transition-all duration-200 flex items-center justify-center"
+            className="w-full bg-gradient-to-r from-blue-400 to-blue-500 text-white py-3 px-4 rounded-lg font-semibold hover:from-blue-500 hover:to-blue-600 focus:ring-4 focus:ring-blue-300 transition-all duration-200 flex items-center justify-center"
           >
             {isLoading ? (
               <>

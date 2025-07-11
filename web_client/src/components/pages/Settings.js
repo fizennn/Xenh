@@ -23,12 +23,12 @@ function Settings() {
 
   return (
     <div className="bg-gradient-to-br from-f3e7f9 to-fce7f3 p-6 rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold text-purple-600 mb-6">Cài đặt hệ thống</h2>
+      <h2 className="text-2xl font-bold text-blue-600 mb-6">Cài đặt hệ thống</h2>
       <div className="bg-white p-6 rounded shadow">
-        <h3 className="text-lg font-semibold text-purple-600 mb-4">Cấu hình chung</h3>
+        <h3 className="text-lg font-semibold text-blue-600 mb-4">Cấu hình chung</h3>
         <Form fields={formFields} initialData={settings} onSubmit={handleSubmit} />
         <button
-          className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 mt-4"
+          className="bg-gradient-to-r from-blue-400 to-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mt-4"
           onClick={() => handleSubmit(settings)}
         >
           <i className="fas fa-save mr-2"></i>
