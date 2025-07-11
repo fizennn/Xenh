@@ -3,11 +3,11 @@ import React from 'react';
 function Table({ columns, data }) {
   return (
     <div className="overflow-x-auto">
-      <table className="min-w-full bg-white border">
+      <table className="min-w-full bg-white border text-base">
         <thead>
           <tr>
             {columns.map((column) => (
-              <th key={column.header} className="px-4 py-2 border text-left">
+              <th key={column.header} className="px-6 py-4 border text-left text-base">
                 {column.header}
               </th>
             ))}
@@ -17,7 +17,7 @@ function Table({ columns, data }) {
           {data.map((row, index) => (
             <tr key={index} className="border-t">
               {columns.map((column) => (
-                <td key={column.header} className="px-4 py-2">
+                <td key={column.header} className="px-6 py-4 text-base">
                   {column.render
                     ? column.render(row[column.accessor], row)
                     : row[column.accessor]}

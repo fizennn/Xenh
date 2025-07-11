@@ -14,7 +14,7 @@ function Layout() {
     <div className="flex min-h-screen bg-gray-100">
       <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
       <div className={`flex-1 transition-all duration-300 ${isSidebarOpen ? 'ml-64' : 'ml-16'}`}>
-        <Header toggleSidebar={toggleSidebar} />
+        <Header isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
         <main className="p-6">
           <Outlet />
         </main>
