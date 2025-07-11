@@ -290,11 +290,11 @@ export default function UploadScreen({ navigation, route }) {
             </View>
           )}
 
-          {/* Nhận diện AI là tuỳ chọn */}
-          <TouchableOpacity style={styles.aiBtn} onPress={handleDetect}>
+          {/* XÓA NÚT NHẬN DIỆN TRANG PHỤC (AI) Ở ĐÂY */}
+          {/* <TouchableOpacity style={styles.aiBtn} onPress={handleDetect}>
             <Ionicons name="sparkles-outline" size={20} color="#fff" />
             <Text style={styles.aiBtnText}>Nhận diện trang phục (AI)</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           {loading && <ActivityIndicator size="small" color="#1976d2" style={{ marginVertical: 8 }} />}
 
           {/* Nút đăng bài và hủy */}

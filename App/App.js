@@ -18,6 +18,7 @@ import SearchScreen from './screens/SearchScreen';
 import NotificationsScreen from './screens/NotificationsScreen';
 import UserProfileScreen from './screens/UserProfileScreen';
 import EditPostScreen from './screens/EditPostScreen';
+import AIChatScreen from './screens/AIChatScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -32,6 +33,7 @@ function MainTabs({ onLogout }) {
           if (route.name === 'Home') iconName = 'home-outline';
           else if (route.name === 'Upload') iconName = 'cloud-upload-outline';
           else if (route.name === 'Explore') iconName = 'compass-outline';
+          else if (route.name === 'AI Chat') iconName = 'chatbubble-ellipses-outline';
           else if (route.name === 'Profile') iconName = 'person-outline';
           return <Ionicons name={iconName} size={size} color={color} />;
         },
@@ -44,6 +46,7 @@ function MainTabs({ onLogout }) {
       </Tab.Screen>
       <Tab.Screen name="Upload" component={UploadScreen} />
       <Tab.Screen name="Explore" component={ExploreScreen} />
+      <Tab.Screen name="AI Chat" component={AIChatScreen} />
       <Tab.Screen name="Profile">
         {props => <ProfileScreen {...props} onLogout={() => onLogout()} />}
       </Tab.Screen>

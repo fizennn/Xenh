@@ -81,7 +81,7 @@ export default function ExploreScreen({ navigation }) {
               <View style={styles.postHeader}>
                 <View style={styles.userInfo}>
                   <Pressable onPress={() => navigation.navigate('UserProfile', { user: item.user })}>
-                    <Text style={styles.userName}>{item.user?.name || 'User'}</Text>
+                    <Text style={styles.userName}>{item.user?.username || item.user?.name || 'User'}</Text>
                   </Pressable>
                   <Text style={styles.postTime}>
                     {new Date(item.createdAt).toLocaleDateString('vi-VN')}
