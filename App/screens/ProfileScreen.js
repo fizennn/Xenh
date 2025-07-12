@@ -4,6 +4,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { AppContext } from '../context/AppContext';
 import axios from 'axios';
+import { BASE_URL } from '../constants/api';
 
 const ProfileScreen = ({ navigation, onLogout }) => {
   const [showChangePw, setShowChangePw] = useState(false);
@@ -29,7 +30,7 @@ const ProfileScreen = ({ navigation, onLogout }) => {
       return;
     }
     try {
-      const res = await axios.patch(`http://192.168.2.11:3001/users/${user.id}`, {
+      const res = await axios.patch(`${BASE_URL}/users/${user.id}`, {
         username: editName,
         bio: editBio
       });
@@ -55,7 +56,7 @@ const ProfileScreen = ({ navigation, onLogout }) => {
       return;
     }
     try {
-      const res = await axios.patch(`http://192.168.2.11:3001/users/${user.id}`, {
+      const res = await axios.patch(`${BASE_URL}/users/${user.id}`, {
         password: newPw
       });
       setUserAndSyncPosts(res.data);

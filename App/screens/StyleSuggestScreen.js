@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, FlatList } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import axios from 'axios';
+import { BASE_URL } from '../constants/api';
 
 export default function StyleSuggestScreen() {
   const [suggestions, setSuggestions] = useState([]);
@@ -11,7 +12,7 @@ export default function StyleSuggestScreen() {
   useEffect(() => {
     const fetchSuggestions = async () => {
       try {
-        const res = await axios.get('http://192.168.2.14:3001/suggestions');
+        const res = await axios.get(`${BASE_URL}/suggestions`);
         setSuggestions(res.data);
       } catch (err) {
         setSuggestions([]);

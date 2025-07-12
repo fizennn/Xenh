@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { BASE_URL } from '../constants/api';
 import React, { createContext, useEffect, useState } from 'react';
 
 // Tạo context
@@ -21,14 +22,14 @@ export const AppProvider = ({ children }) => {
     const fetchData = async () => {
       try {
         const [postsRes, usersRes, itemsRes, wardrobesRes, favoritesRes, savedPostsRes, notificationsRes, commentsRes] = await Promise.all([
-                  axios.get('http://192.168.2.11:3001/posts'),
-        axios.get('http://192.168.2.11:3001/users'),
-        axios.get('http://192.168.2.11:3001/items'),
-        axios.get('http://192.168.2.11:3001/wardrobes'),
-        axios.get('http://192.168.2.11:3001/favorites'),
-        axios.get('http://192.168.2.11:3001/savedPosts'),
-        axios.get('http://192.168.2.11:3001/notifications'),
-        axios.get('http://192.168.2.11:3001/comments'),
+          axios.get(`${BASE_URL}/posts`),
+          axios.get(`${BASE_URL}/users`),
+          axios.get(`${BASE_URL}/items`),
+          axios.get(`${BASE_URL}/wardrobes`),
+          axios.get(`${BASE_URL}/favorites`),
+          axios.get(`${BASE_URL}/savedPosts`),
+          axios.get(`${BASE_URL}/notifications`),
+          axios.get(`${BASE_URL}/comments`),
         ]);
         const postsData = postsRes.data;
         const usersData = usersRes.data;
@@ -91,7 +92,7 @@ export const AppProvider = ({ children }) => {
   // Thêm bình luận cho bài đăng (đẩy lên server)
   const addComment = async (postId, comment) => {
     try {
-      const res = await axios.post('http://192.168.2.11:3001/comments', comment);
+      const res = await axios.post(`${BASE_URL}/comments`, comment);
       setComments(prev => [res.data, ...prev]);
     } catch (err) {
       alert('Không thể gửi bình luận!');
@@ -101,7 +102,7 @@ export const AppProvider = ({ children }) => {
   // Thêm favorite
   const addFavorite = async (favorite) => {
     try {
-      const res = await axios.post('http://192.168.2.11:3001/favorites', favorite);
+      const res = await axios.post(`${BASE_URL}/favorites`, favorite);
       setFavorites(prev => [res.data, ...prev]);
     } catch (err) {
       alert('Không thể thêm yêu thích!');
@@ -111,7 +112,7 @@ export const AppProvider = ({ children }) => {
   // Xóa favorite
   const removeFavorite = async (favoriteId) => {
     try {
-      await axios.delete(`http://192.168.2.11:3001/favorites/${favoriteId}`);
+      await axios.delete(`${BASE_URL}/favorites/${favoriteId}`);
       setFavorites(prev => prev.filter(f => f.id !== favoriteId));
     } catch (err) {
       alert('Không thể xóa yêu thích!');
@@ -121,7 +122,7 @@ export const AppProvider = ({ children }) => {
   // Thêm savedPost
   const addSavedPost = async (savedPost) => {
     try {
-      const res = await axios.post('http://192.168.2.11:3001/savedPosts', savedPost);
+      const res = await axios.post(`${BASE_URL}/savedPosts`, savedPost);
       setSavedPosts(prev => [res.data, ...prev]);
     } catch (err) {
       alert('Không thể lưu bài!');
@@ -131,7 +132,7 @@ export const AppProvider = ({ children }) => {
   // Xóa savedPost
   const removeSavedPost = async (savedPostId) => {
     try {
-      await axios.delete(`http://192.168.2.11:3001/savedPosts/${savedPostId}`);
+      await axios.delete(`${BASE_URL}/savedPosts/${savedPostId}`);
       setSavedPosts(prev => prev.filter(s => s.id !== savedPostId));
     } catch (err) {
       alert('Không thể bỏ lưu bài!');

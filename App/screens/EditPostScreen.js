@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, Button, Image, StyleSheet, Alert } from 'react-native';
 import axios from 'axios';
+import { BASE_URL } from '../constants/api';
 import { AppContext } from '../context/AppContext';
 
 const EditPostScreen = ({ route, navigation }) => {
@@ -11,7 +12,7 @@ const EditPostScreen = ({ route, navigation }) => {
 
   const handleSave = async () => {
     try {
-      const res = await axios.patch(`http://192.168.2.11:3001/posts/${post.id}`, {
+      const res = await axios.patch(`${BASE_URL}/posts/${post.id}`, {
         caption,
         image
       });

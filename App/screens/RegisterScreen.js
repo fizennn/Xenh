@@ -3,6 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, Pressable, Alert }
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import axios from 'axios';
+import { BASE_URL } from '../constants/api';
 
 const RegisterScreen = ({ navigation, onRegister }) => {
   const [email, setEmail] = useState('');
@@ -24,14 +25,14 @@ const RegisterScreen = ({ navigation, onRegister }) => {
     setLoading(true);
     try {
       // Kiểm tra trùng email
-      const res = await axios.get('http://192.168.2.14:3001/users?email=' + encodeURIComponent(email));
+      const res = await axios.get(`${BASE_URL}/users?email=` + encodeURIComponent(email));
       if (res.data && res.data.length > 0) {
         setLoading(false);
         Alert.alert('Lỗi', 'Email đã tồn tại!');
         return;
       }
       // Gửi dữ liệu user mới lên server
-              await axios.post('http://192.168.2.14:3001/users', {
+              await axios.post(`${BASE_URL}/users`, {
         email,
         password,
         username: email.split('@')[0],

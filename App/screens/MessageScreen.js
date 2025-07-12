@@ -1,9 +1,10 @@
 import axios from 'axios';
+import { BASE_URL } from '../constants/api';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { FlatList, KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { AppContext } from '../context/AppContext';
 
-const API_URL = 'http://192.168.2.14:3001/messages';
+const API_URL = `${BASE_URL}/messages`;
 
 const MessageScreen = ({ route }) => {
   const { user } = useContext(AppContext);
